@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7EF0B5F4-FD78-4449-A8DA-B1B61D1C8D0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.ObjectModel", "Core.ObjectModel\Core.ObjectModel.csproj", "{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.ObjectService", "Core.ObjectService\Core.ObjectService.csproj", "{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.AppService", "Core.AppService\Core.AppService.csproj", "{680EB98F-96B3-4A53-9DDF-5440A0D95741}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{131E6211-61FD-41F7-A691-6F22B4ABDE72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Entity", "Infrastructure.Entity\Infrastructure.Entity.csproj", "{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Identity", "Infrastructure.Identity\Infrastructure.Identity.csproj", "{CD38A79C-D827-46E6-BF53-146D2339F45B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{CC5FB77B-AB01-44C9-9117-692418C0E917}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Business", "Service.Business\Service.Business.csproj", "{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MilkteaClient", "MilkteaClient", "{A99558F5-23A5-4B9C-851F-4EDD2682900D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MilkteaAdmin", "MilkteaAdmin", "{13CA5AFB-69D9-4B1A-A2AB-24800EB2F6DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkteaMobileClientAPI", "MilkteaMobileClientAPI\MilkteaMobileClientAPI.csproj", "{B533D1D1-6BA0-40D5-B16A-18CF1E650D52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkteaAdminAPI", "MilkteaAdminAPI\MilkteaAdminAPI.csproj", "{47AE22BD-D887-4356-BD69-982500A8FA43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{680EB98F-96B3-4A53-9DDF-5440A0D95741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{680EB98F-96B3-4A53-9DDF-5440A0D95741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{680EB98F-96B3-4A53-9DDF-5440A0D95741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{680EB98F-96B3-4A53-9DDF-5440A0D95741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD38A79C-D827-46E6-BF53-146D2339F45B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD38A79C-D827-46E6-BF53-146D2339F45B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD38A79C-D827-46E6-BF53-146D2339F45B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD38A79C-D827-46E6-BF53-146D2339F45B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B533D1D1-6BA0-40D5-B16A-18CF1E650D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B533D1D1-6BA0-40D5-B16A-18CF1E650D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B533D1D1-6BA0-40D5-B16A-18CF1E650D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B533D1D1-6BA0-40D5-B16A-18CF1E650D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47AE22BD-D887-4356-BD69-982500A8FA43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47AE22BD-D887-4356-BD69-982500A8FA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47AE22BD-D887-4356-BD69-982500A8FA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47AE22BD-D887-4356-BD69-982500A8FA43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF} = {7EF0B5F4-FD78-4449-A8DA-B1B61D1C8D0E}
+		{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF} = {7EF0B5F4-FD78-4449-A8DA-B1B61D1C8D0E}
+		{680EB98F-96B3-4A53-9DDF-5440A0D95741} = {7EF0B5F4-FD78-4449-A8DA-B1B61D1C8D0E}
+		{1BD7026C-03EA-44A2-BE46-82A739E4EFFD} = {131E6211-61FD-41F7-A691-6F22B4ABDE72}
+		{CD38A79C-D827-46E6-BF53-146D2339F45B} = {131E6211-61FD-41F7-A691-6F22B4ABDE72}
+		{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7} = {CC5FB77B-AB01-44C9-9117-692418C0E917}
+		{B533D1D1-6BA0-40D5-B16A-18CF1E650D52} = {A99558F5-23A5-4B9C-851F-4EDD2682900D}
+		{47AE22BD-D887-4356-BD69-982500A8FA43} = {13CA5AFB-69D9-4B1A-A2AB-24800EB2F6DA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96AC2E41-D8D4-479B-9A05-8B2E0CE31AAB}
+	EndGlobalSection
+EndGlobal
