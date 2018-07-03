@@ -40,7 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\BaseService.cs" />
+    <Compile Include="Business\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.AppService\Core.AppService.csproj">
+      <Project>{680EB98F-96B3-4A53-9DDF-5440A0D95741}</Project>
+      <Name>Core.AppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.ObjectModel\Core.ObjectModel.csproj">
+      <Project>{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}</Project>
+      <Name>Core.ObjectModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.ObjectService\Core.ObjectService.csproj">
+      <Project>{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}</Project>
+      <Name>Core.ObjectService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

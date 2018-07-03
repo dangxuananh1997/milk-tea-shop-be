@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,7 +47,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\MilkteaContext.cs" />
+    <Compile Include="Database\MilkteaProvider.cs" />
+    <Compile Include="Migrations\201807030251318_duong_03072018.cs" />
+    <Compile Include="Migrations\201807030251318_duong_03072018.Designer.cs">
+      <DependentUpon>201807030251318_duong_03072018.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.AppService\Core.AppService.csproj">
+      <Project>{680eb98f-96b3-4a53-9ddf-5440a0d95741}</Project>
+      <Name>Core.AppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.ObjectModel\Core.ObjectModel.csproj">
+      <Project>{7d7450c4-ca99-41e4-8a44-c3b072d0ceff}</Project>
+      <Name>Core.ObjectModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.ObjectService\Core.ObjectService.csproj">
+      <Project>{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}</Project>
+      <Name>Core.ObjectService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807030251318_duong_03072018.resx">
+      <DependentUpon>201807030251318_duong_03072018.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{680EB98F-96B3-4A53-9DDF-5440A0D95741}</ProjectGuid>
+    <ProjectGuid>{7EB44CAC-ECAC-4136-854A-46046217FF83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.AppService</RootNamespace>
-    <AssemblyName>Core.AppService</AssemblyName>
+    <RootNamespace>DependencyResolver</RootNamespace>
+    <AssemblyName>DependencyResolver</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,16 +43,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Business\IBaseService.cs" />
-    <Compile Include="Business\IProductService.cs" />
-    <Compile Include="Database\IDatabase.cs" />
-    <Compile Include="Database\MilkTea\IMilkteaContext.cs" />
+    <Compile Include="Modules\InfrastructureModule.cs" />
+    <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core.ObjectModel\Core.ObjectModel.csproj">
-      <Project>{7D7450C4-CA99-41E4-8A44-C3B072D0CEFF}</Project>
-      <Name>Core.ObjectModel</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.AppService\Core.AppService.csproj">
+      <Project>{680EB98F-96B3-4A53-9DDF-5440A0D95741}</Project>
+      <Name>Core.AppService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.ObjectService\Core.ObjectService.csproj">
+      <Project>{C7ED8251-E1DD-44B9-8064-9EBDB035C0BF}</Project>
+      <Name>Core.ObjectService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Entity\Infrastructure.Entity.csproj">
+      <Project>{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}</Project>
+      <Name>Infrastructure.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Service.Business\Service.Business.csproj">
+      <Project>{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}</Project>
+      <Name>Service.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,17 +1,33 @@
-﻿using System;
+﻿using DependencyResolver.Modules;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Common.WebHost;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Reflection;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace MilkteaAdminAPI
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : NinjectHttpApplication
     {
-        protected void Application_Start()
+        protected override void OnApplicationStarted()
         {
+            base.OnApplicationStarted();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+        }
+
+        protected override IKernel CreateKernel()
+        {
+            var kernel = new StandardKernel();
+            kernel.Load(Assembly.GetExecutingAssembly());
+
+            List<NinjectModule> modules = new List<NinjectModule>()
+            {
+                new InfrastructureModule(),
+                new ServiceModule()
+            };
+            kernel.Load(modules);
+            return kernel;
         }
     }
 }

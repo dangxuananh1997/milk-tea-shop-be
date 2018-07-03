@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkteaMobileClientAPI", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkteaAdminAPI", "MilkteaAdminAPI\MilkteaAdminAPI.csproj", "{47AE22BD-D887-4356-BD69-982500A8FA43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyResolver", "DependencyResolver\DependencyResolver.csproj", "{7EB44CAC-ECAC-4136-854A-46046217FF83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{47AE22BD-D887-4356-BD69-982500A8FA43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47AE22BD-D887-4356-BD69-982500A8FA43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47AE22BD-D887-4356-BD69-982500A8FA43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EB44CAC-ECAC-4136-854A-46046217FF83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EB44CAC-ECAC-4136-854A-46046217FF83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EB44CAC-ECAC-4136-854A-46046217FF83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EB44CAC-ECAC-4136-854A-46046217FF83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7} = {CC5FB77B-AB01-44C9-9117-692418C0E917}
 		{B533D1D1-6BA0-40D5-B16A-18CF1E650D52} = {A99558F5-23A5-4B9C-851F-4EDD2682900D}
 		{47AE22BD-D887-4356-BD69-982500A8FA43} = {13CA5AFB-69D9-4B1A-A2AB-24800EB2F6DA}
+		{7EB44CAC-ECAC-4136-854A-46046217FF83} = {CC5FB77B-AB01-44C9-9117-692418C0E917}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96AC2E41-D8D4-479B-9A05-8B2E0CE31AAB}

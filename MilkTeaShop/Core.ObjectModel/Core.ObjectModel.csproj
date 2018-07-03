@@ -40,7 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\CouponItem.cs" />
+    <Compile Include="Entity\CouponPackage.cs" />
+    <Compile Include="Entity\EnumType.cs" />
+    <Compile Include="Entity\Order.cs" />
+    <Compile Include="Entity\OrderDetail.cs" />
+    <Compile Include="Entity\Product.cs" />
+    <Compile Include="Entity\ProductVariant.cs" />
+    <Compile Include="Entity\User.cs" />
+    <Compile Include="Entity\UserCouponPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
