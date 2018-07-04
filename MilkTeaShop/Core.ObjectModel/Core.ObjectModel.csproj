@@ -49,6 +49,7 @@
     <Compile Include="Entity\ProductVariant.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\UserCouponPackage.cs" />
+    <Compile Include="Identity\SystemIdentityResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

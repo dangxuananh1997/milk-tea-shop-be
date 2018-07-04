@@ -44,6 +44,8 @@
     <Compile Include="Business\IProductService.cs" />
     <Compile Include="Business\IProductVariantService.cs" />
     <Compile Include="Database\IDatabase.cs" />
+    <Compile Include="Database\Identity\IIdentityProvider.cs" />
+    <Compile Include="Database\Identity\IIdentityService.cs" />
     <Compile Include="Database\MilkTea\IMilkteaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -53,5 +55,6 @@
       <Name>Core.ObjectModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

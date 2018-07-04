@@ -17,11 +17,11 @@ namespace API.MilkteaAdmin.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetAll()
+        public IHttpActionResult Get(int productId)
         {
             List<ProductVariantVM> productVariantVMs = AutoMapper.Mapper
                 .Map<List<ProductVariant>, List<ProductVariantVM>>
-                (_productVariantService.GetAllProductVariant(_ => _.Product).ToList());
+                (_productVariantService.GetAllProductVariant(_ => _.Product).Where(_ => _.ProductId == productId).ToList());
 
             return Ok(productVariantVMs);
         }

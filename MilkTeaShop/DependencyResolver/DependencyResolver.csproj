@@ -60,6 +60,10 @@
       <Project>{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}</Project>
       <Name>Infrastructure.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Identity\Infrastructure.Identity.csproj">
+      <Project>{CD38A79C-D827-46E6-BF53-146D2339F45B}</Project>
+      <Name>Infrastructure.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Service.Business\Service.Business.csproj">
       <Project>{0A6C36C7-DC02-47F3-B3F0-C23C10ED51E7}</Project>
       <Name>Service.Business</Name>

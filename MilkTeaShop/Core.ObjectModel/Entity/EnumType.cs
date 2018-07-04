@@ -9,4 +9,9 @@
     {
         Cash, Coupon, Card
     }
+
+    public enum UserType : int
+    {
+        Administrator, Guess, Member, Shipper
+    }
 }
