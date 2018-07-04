@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Business\IBaseService.cs" />
     <Compile Include="Business\IProductService.cs" />
+    <Compile Include="Business\IProductVariantService.cs" />
     <Compile Include="Database\IDatabase.cs" />
     <Compile Include="Database\MilkTea\IMilkteaContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -48,6 +48,7 @@ namespace Infrastructure.Entity.Database
             modelBuilder.Entity<Product>().ToTable("Product");
             modelBuilder.Entity<Product>().HasKey(_ => _.Id);
             modelBuilder.Entity<Product>().Property(_ => _.Name);
+            modelBuilder.Entity<Product>().Property(_ => _.Picture);
 
             modelBuilder.Entity<ProductVariant>().ToTable("ProductVariant");
             modelBuilder.Entity<ProductVariant>().HasKey(_ => _.Id);
@@ -93,9 +94,9 @@ namespace Infrastructure.Entity.Database
                 .HasOptional(_ => _.CouponItem)
                 .WithRequired(_ => _.Order);
 
-            modelBuilder.Entity<OrderDetail>()
-                .HasRequired(_ => _.ProductVariant)
-                .WithRequiredDependent(_ => _.OrderDetail);
+            modelBuilder.Entity<ProductVariant>()
+                .HasOptional(_ => _.OrderDetail)
+                .WithRequired(_ => _.ProductVariant);
 
             modelBuilder.Entity<Product>()
                 .HasMany(_ => _.ProductVariants)

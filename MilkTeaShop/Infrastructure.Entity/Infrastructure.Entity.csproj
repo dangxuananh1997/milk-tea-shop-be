@@ -53,6 +53,14 @@
     <Compile Include="Migrations\201807030251318_duong_03072018.Designer.cs">
       <DependentUpon>201807030251318_duong_03072018.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807040612445_duong_04072018.cs" />
+    <Compile Include="Migrations\201807040612445_duong_04072018.Designer.cs">
+      <DependentUpon>201807040612445_duong_04072018.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807040621281_duong_04072018_1.cs" />
+    <Compile Include="Migrations\201807040621281_duong_04072018_1.Designer.cs">
+      <DependentUpon>201807040621281_duong_04072018_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -79,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807030251318_duong_03072018.resx">
       <DependentUpon>201807030251318_duong_03072018.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807040612445_duong_04072018.resx">
+      <DependentUpon>201807040612445_duong_04072018.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807040621281_duong_04072018_1.resx">
+      <DependentUpon>201807040621281_duong_04072018_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

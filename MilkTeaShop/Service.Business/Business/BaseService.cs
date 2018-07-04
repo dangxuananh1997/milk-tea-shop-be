@@ -51,5 +51,10 @@
         {
             this._repository.Delete(keys);
         }
+
+        protected virtual void SaveChanges()
+        {
+            this._unitOfWork.SaveChanges();
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace DependencyResolver.Modules
         public override void Load()
         {
             Bind<IProductService>().To<ProductService>();
+            Bind<IProductVariantService>().To<ProductVariantService>();
         }
     }
 }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MilkteaMobileClientAPI")]
+[assembly: AssemblyTitle("API.MilkteaClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MilkteaMobileClientAPI")]
+[assembly: AssemblyProduct("API.MilkteaClient")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("b533d1d1-6ba0-40d5-b16a-18cf1e650d52")]
+[assembly: Guid("93f832a9-eb2e-4fd2-b511-1106c345a064")]
 
 // Version information for an assembly consists of the following four values:
 //

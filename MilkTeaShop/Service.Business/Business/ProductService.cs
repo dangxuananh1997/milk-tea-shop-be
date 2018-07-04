@@ -48,5 +48,10 @@ namespace Service.Business.Business
         {
             base.Update(product);
         }
+
+        public void SaveProductChanges()
+        {
+            base.SaveChanges();
+        }
     }
 }

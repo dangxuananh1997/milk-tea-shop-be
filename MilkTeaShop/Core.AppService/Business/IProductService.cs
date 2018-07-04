@@ -20,5 +20,7 @@
         void DeleteProduct(Product product);
 
         void DeleteProduct(int productId);
+
+        void SaveProductChanges();
     }
 }
