@@ -4,9 +4,11 @@ using Core.ObjectModel.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.MilkteaAdmin.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductVariantsController : ApiController
     {
         private readonly IProductVariantService _productVariantService;

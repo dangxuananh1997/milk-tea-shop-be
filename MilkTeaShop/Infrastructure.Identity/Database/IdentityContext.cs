@@ -7,7 +7,7 @@ namespace Infrastructure.Identity.Database
 
     public class IdentityContext : IdentityDbContext<Account>
     {
-        public IdentityContext() : base("MilkteaCnn1")
+        public IdentityContext() : base("MilkteaCnn")
         {
 
         }
