@@ -60,6 +60,7 @@ namespace Infrastructure.Identity.Adapter
                 {
                     ClaimsIdentity claimsIdentity = await this._accountService.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                     claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, user.UserType.ToString()));
 
                     result.Data = claimsIdentity;
                 }
