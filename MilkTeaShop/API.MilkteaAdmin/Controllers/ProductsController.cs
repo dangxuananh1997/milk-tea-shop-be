@@ -85,26 +85,27 @@ namespace API.MilkteaAdmin.Controllers
             {
                 // Create product
                 Product product = AutoMapper.Mapper.Map<ProductCM, Product>(cm);
+                product.Picture = null;
                 _productService.CreateProduct(product);
                 _productService.SaveProductChanges();
-
-                // image stream
-                var bytes = Convert.FromBase64String(cm.Picture);
-                // physical server path
-                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
-                // SAVE IMAGE TO SERVER
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
+                if (!String.IsNullOrEmpty(cm.Picture))
                 {
-                    image = Image.FromStream(ms);
-                    image.Save(filePath + product.Id + ".jpg");
-
+                    // image stream
+                    var bytes = Convert.FromBase64String(cm.Picture);
+                    // physical server path
+                    string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
+                    // SAVE IMAGE TO SERVER
+                    Image image;
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    {
+                        image = Image.FromStream(ms);
+                        image.Save(filePath + product.Id + ".jpg");
+                    }
+                    // UPDATE IMAGE PATH
+                    product.Picture = "/Media/Product/" + product.Id + ".jpg";
+                    _productService.UpdateProduct(product);
+                    _productService.SaveProductChanges();
                 }
-
-                // UPDATE IMAGE PATH
-                product.Picture = "/Media/Product/" + product.Id + ".jpg";
-                _productService.UpdateProduct(product);
-
                 // RESPONSE
                 ProductVM productVM = AutoMapper.Mapper.Map<Product, ProductVM>(product);
                 return Ok(productVM);
@@ -120,21 +121,24 @@ namespace API.MilkteaAdmin.Controllers
         {
             try
             {
-                // PHYSICAL PATH
-                string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
-                // IMAGE STREAM
-                var bytes = Convert.FromBase64String(um.Picture);
-                // SAVE IMAGE TO SERVER
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
-                {
-                    image = Image.FromStream(ms);
-                    image.Save(filePath + um.Id + ".jpg");
+                Product product = AutoMapper.Mapper.Map<ProductUM, Product>(um);
 
+                if (!um.Picture.Contains("/Media/Product/"))
+                {
+                    // PHYSICAL PATH
+                    string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
+                    // IMAGE STREAM
+                    var bytes = Convert.FromBase64String(um.Picture);
+                    // SAVE IMAGE TO SERVER
+                    Image image;
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    {
+                        image = Image.FromStream(ms);
+                        image.Save(filePath + um.Id + ".jpg");
+                    }
                 }
 
                 // UPDATE
-                Product product = AutoMapper.Mapper.Map<ProductUM, Product>(um);
                 product.Picture = "/Media/Product/" + product.Id + ".jpg";
 
                 _productService.UpdateProduct(product);

@@ -72,7 +72,7 @@ namespace Infrastructure.Identity.Adapter
         {
             SystemIdentityResult result = new SystemIdentityResult();
 
-            IdentityResult user = await this._accountService.CreateAsync(new Account { UserName = username }, password);
+            IdentityResult user = await this._accountService.CreateAsync(new Account { UserName = username, Email = username }, password);
 
             if (!user.Succeeded)
             {

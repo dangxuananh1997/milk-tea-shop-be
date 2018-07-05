@@ -167,6 +167,7 @@
     <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Models\ProductVariantModels.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\CustomOAuthorAuthorization.cs" />
     <Compile Include="Startup.cs" />

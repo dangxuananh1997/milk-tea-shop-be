@@ -1,5 +1,7 @@
 ﻿using Core.ObjectModel.Entity;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
 
 namespace Infrastructure.Entity.Database
 {
@@ -58,7 +60,11 @@ namespace Infrastructure.Entity.Database
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<User>().HasKey(_ => _.Id);
             modelBuilder.Entity<User>().Property(_ => _.FullName);
-            modelBuilder.Entity<User>().Property(_ => _.Username);
+            modelBuilder.Entity<User>().Property(t => t.Username).IsRequired().HasMaxLength(192)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                            new IndexAnnotation(
+                            new IndexAttribute("IX_Username", 1) { IsUnique = true }));
 
             modelBuilder.Entity<UserCouponPackage>().ToTable("UserCouponPackage");
             modelBuilder.Entity<UserCouponPackage>().HasKey(_ => _.Id);
@@ -101,7 +107,8 @@ namespace Infrastructure.Entity.Database
             modelBuilder.Entity<Product>()
                 .HasMany(_ => _.ProductVariants)
                 .WithRequired(_ => _.Product)
-                .HasForeignKey(_ => _.ProductId);
+                .HasForeignKey(_ => _.ProductId)
+                .WillCascadeOnDelete(true);
         }
     }
 }

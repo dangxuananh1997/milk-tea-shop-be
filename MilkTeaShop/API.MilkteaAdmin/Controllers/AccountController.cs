@@ -1,5 +1,7 @@
 ﻿using API.MilkteaAdmin.Models;
+using Core.AppService.Business;
 using Core.AppService.Database.Identity;
+using Core.ObjectModel.Entity;
 using Core.ObjectModel.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,12 @@ namespace API.MilkteaAdmin.Controllers
     public class AccountController : ApiController
     {
         private readonly IIdentityService _identityService;
+        private readonly IUserService _userService;
 
-        public AccountController(IIdentityService identityService)
+        public AccountController(IIdentityService identityService, IUserService userService)
         {
-            _identityService = identityService;
+            this._identityService = identityService;
+            this._userService = userService;
         }
 
         [HttpPost]
@@ -30,7 +34,9 @@ namespace API.MilkteaAdmin.Controllers
             {
                 return BadRequest(ModelState);
             }
+
             SystemIdentityResult result = await this._identityService.Register(account.Email, account.Password);
+
 
             if (result.IsError)
             {
@@ -40,6 +46,8 @@ namespace API.MilkteaAdmin.Controllers
             }
             else
             {
+                User user = AutoMapper.Mapper.Map<RegisterBindingModel, User>(account);
+                _userService.CreateUser(user);
                 return Ok();
             }
         }
