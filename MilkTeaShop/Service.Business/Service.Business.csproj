@@ -41,8 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\BaseService.cs" />
+    <Compile Include="Business\CouponItemService.cs" />
+    <Compile Include="Business\CouponPackageService.cs" />
+    <Compile Include="Business\OrderDetailService.cs" />
+    <Compile Include="Business\OrderService.cs" />
     <Compile Include="Business\ProductService.cs" />
     <Compile Include="Business\ProductVariantService.cs" />
+    <Compile Include="Business\UserCouponPackageService.cs" />
+    <Compile Include="Business\UserService.cs" />
     <Compile Include="Pagination\PaginationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

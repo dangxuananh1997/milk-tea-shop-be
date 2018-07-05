@@ -41,8 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\IBaseService.cs" />
+    <Compile Include="Business\ICouponItemService.cs" />
+    <Compile Include="Business\ICouponPackageService.cs" />
+    <Compile Include="Business\IOrderDetailService.cs" />
+    <Compile Include="Business\IOrderService.cs" />
     <Compile Include="Business\IProductService.cs" />
     <Compile Include="Business\IProductVariantService.cs" />
+    <Compile Include="Business\IUserCouponPackageService.cs" />
+    <Compile Include="Business\IUserService.cs" />
     <Compile Include="Database\IDatabase.cs" />
     <Compile Include="Database\Identity\IIdentityProvider.cs" />
     <Compile Include="Database\Identity\IIdentityService.cs" />

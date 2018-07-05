@@ -13,7 +13,6 @@ using System.Web.Http.Cors;
 
 namespace API.MilkteaAdmin.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private readonly IIdentityService _identityService;

@@ -1,4 +1,5 @@
-﻿using API.MilkteaAdmin.Models;
+﻿using API.MilkteaAdmin.ConstantManager;
+using API.MilkteaAdmin.Models;
 using Core.AppService.Business;
 using Core.ObjectModel.Entity;
 using System.Collections.Generic;
@@ -8,7 +9,6 @@ using System.Web.Http.Cors;
 
 namespace API.MilkteaAdmin.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductVariantsController : ApiController
     {
         private readonly IProductVariantService _productVariantService;
@@ -21,40 +21,79 @@ namespace API.MilkteaAdmin.Controllers
         [HttpGet]
         public IHttpActionResult Get(int productId)
         {
-            List<ProductVariantVM> productVariantVMs = AutoMapper.Mapper
-                .Map<List<ProductVariant>, List<ProductVariantVM>>
-                (_productVariantService.GetAllProductVariant(_ => _.Product).Where(_ => _.ProductId == productId).ToList());
+            if (productId <= 0)
+            {
+                return BadRequest(ErrorMessage.INVALID_ID);
+            }
+            try
+            {
+                // 
+                List<ProductVariantVM> productVariantVMs = AutoMapper.Mapper
+                    .Map<List<ProductVariant>, List<ProductVariantVM>>
+                    (_productVariantService.GetAllProductVariant(_ => _.Product)
+                    .Where(_ => _.ProductId == productId).ToList());
 
-            return Ok(productVariantVMs);
+                return Ok(productVariantVMs);
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError(e);
+            }
+            
         }
 
         [HttpPost]
         public IHttpActionResult Create(ProductVariantCM cm)
         {
-            ProductVariant productVariant = AutoMapper.Mapper.Map<ProductVariantCM, ProductVariant>(cm);
-            _productVariantService.CreateProductVariant(productVariant);
-            _productVariantService.SaveProductVariantChanges();
+            try
+            {
+                ProductVariant productVariant = AutoMapper.Mapper.Map<ProductVariantCM, ProductVariant>(cm);
+                _productVariantService.CreateProductVariant(productVariant);
+                _productVariantService.SaveProductVariantChanges();
 
-            return Ok(cm);
+                return Ok(cm);
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         [HttpPut]
         public IHttpActionResult Update(ProductVariantUM um)
         {
-            ProductVariant productVariant = AutoMapper.Mapper.Map<ProductVariantUM, ProductVariant>(um);
-            _productVariantService.UpdateProductVariant(productVariant);
-            _productVariantService.SaveProductVariantChanges();
-
-            return Ok(um);
+            try
+            {
+                ProductVariant productVariant = AutoMapper.Mapper.Map<ProductVariantUM, ProductVariant>(um);
+                _productVariantService.UpdateProductVariant(productVariant);
+                _productVariantService.SaveProductVariantChanges();
+                return Ok(um);
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            _productVariantService.DeleteProductVariant(id);
-            _productVariantService.SaveProductVariantChanges();
+            if (id <= 0)
+            {
+                return BadRequest(ErrorMessage.INVALID_ID);
+            }
 
-            return Ok();
+            try
+            {
+                _productVariantService.DeleteProductVariant(id);
+                _productVariantService.SaveProductVariantChanges();
+
+                return Ok();
+            }
+            catch (System.Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using API.MilkteaAdmin.Provider;
 using Core.AppService.Database.Identity;
 using DependencyResolver.Modules;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Ninject;
 using Ninject.Modules;
@@ -41,7 +42,7 @@ namespace API.MilkteaAdmin
 
         public void Configuration(IAppBuilder app)
         {
-
+            //app.UseCors(CorsOptions.AllowAll);
             //Middleware
             app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions()
             {

@@ -13,7 +13,7 @@
 
     public class ProductVariantCM
     {
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         public Size Size { get; set; }
         public decimal Price { get; set; }
     }
@@ -21,7 +21,7 @@
     public class ProductVariantUM
     {
         public int Id { get; set; }
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
         public Size Size { get; set; }
         public decimal Price { get; set; }
     }

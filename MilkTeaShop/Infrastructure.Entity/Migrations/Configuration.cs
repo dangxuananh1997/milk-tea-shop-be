@@ -15,6 +15,8 @@ namespace Infrastructure.Entity.Migrations
 
         protected override void Seed(Infrastructure.Entity.Database.MilkteaContext context)
         {
+            Random rd = new Random();
+
             string[] milkteaNames = { "Hồng trà sữa", "Lục trà sữa", "Trà sữa Thái", "Trà sữa ô long", "Trà sữa thập cẩm", "Trà ô long", "Trà đen", "Trà xanh", "Sinh tố", "Milkshake" };
             for (int i = 0; i < 10; i++)
             {
@@ -24,9 +26,16 @@ namespace Infrastructure.Entity.Migrations
                 });
             }
 
-            context.SaveChanges();
+            for (int i = 0; i < 100; i++)
+            {
+                context.Products.AddOrUpdate(x => x.Name, new Product()
+                {
+                    Name = milkteaNames[rd.Next(0,10)] + i,
+                });
+            }
 
-            Random rd = new Random();
+            context.SaveChanges();
+            
 
             for (int i = 1; i <= 10; i++)
             {
