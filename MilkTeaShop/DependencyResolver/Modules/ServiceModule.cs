@@ -1,9 +1,11 @@
 ﻿using Core.AppService.Business;
 using Core.AppService.Database.Identity;
+using Core.AppService.Pagination;
 using Infrastructure.Identity;
 using Infrastructure.Identity.Adapter;
 using Ninject.Modules;
 using Service.Business.Business;
+using Service.Business.Pagination;
 
 namespace DependencyResolver.Modules
 {
@@ -15,6 +17,7 @@ namespace DependencyResolver.Modules
             Bind<IIdentityProvider>().To<IdentityProvider>();
             Bind<IProductService>().To<ProductService>();
             Bind<IProductVariantService>().To<ProductVariantService>();
+            Bind<IPagination>().To<PaginationService>();
 
         }
     }

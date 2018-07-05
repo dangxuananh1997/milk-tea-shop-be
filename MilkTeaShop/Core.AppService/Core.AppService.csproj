@@ -47,6 +47,7 @@
     <Compile Include="Database\Identity\IIdentityProvider.cs" />
     <Compile Include="Database\Identity\IIdentityService.cs" />
     <Compile Include="Database\MilkTea\IMilkteaContext.cs" />
+    <Compile Include="Pagination\IPagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

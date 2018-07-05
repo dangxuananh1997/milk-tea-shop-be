@@ -1,5 +1,7 @@
-﻿using API.MilkteaAdmin.Models;
+﻿using API.MilkteaAdmin.ConstantManager;
+using API.MilkteaAdmin.Models;
 using Core.AppService.Business;
+using Core.AppService.Pagination;
 using Core.ObjectModel.Entity;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,34 @@ namespace API.MilkteaAdmin.Controllers
     public class ProductsController : ApiController
     {
         private readonly IProductService _productService;
+        private readonly IPagination _pagination;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IPagination pagination)
         {
-            _productService = productService;
+            this._productService = productService;
+            this._pagination = pagination;
         }
 
         [HttpGet]
-        public IHttpActionResult Get()
+        public IHttpActionResult Get(int pageIndex, string searchValue)
         {
-            List<ProductVM> productVMs = AutoMapper.Mapper.Map<List<Product>, List<ProductVM>>(_productService.GetAllProduct().ToList());
+            System.Collections.Generic.List<Product> products;
+            if (String.IsNullOrEmpty(searchValue))
+            {
+                // GET ALL
+                products = _productService.GetAllProduct().ToList();
+            }
+            else
+            {
+                // GET SEARCH RESULT
+                products = _productService.GetAllProduct().Where(p => p.Name.Contains(searchValue)).ToList();
+            }
 
-            return Ok(productVMs);
+
+            List<ProductVM> productVMs = AutoMapper.Mapper.Map<System.Collections.Generic.List<Product>, System.Collections.Generic.List<ProductVM>>(products);
+            List<ProductVM> result = _pagination.ToPagedList<ProductVM>(pageIndex, ConstantDataManager.PAGESIZE, productVMs);
+
+            return Ok(result);
         }
 
         [HttpGet]
