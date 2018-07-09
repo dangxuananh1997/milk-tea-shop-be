@@ -45,6 +45,23 @@
             CreateMap<RegisterBindingModel, User>()
                 .ForMember(m => m.Username, map => map.MapFrom(vm => vm.Email));
             #endregion
+
+            #region CouponPackage
+            CreateMap<CouponPackageCM, CouponPackage>()
+                .ForMember(m => m.Name, map => map.MapFrom(vm => vm.Name))
+                .ForMember(m => m.DrinkQuantity, map => map.MapFrom(vm => vm.DrinkQuantity))
+                .ForMember(m => m.Price, map => map.MapFrom(vm => vm.Price));
+
+            CreateMap<CouponPackageUM, CouponPackage>()
+                .ForMember(m => m.Id, map => map.MapFrom(vm => vm.Id))
+                .ForMember(m => m.Name, map => map.MapFrom(vm => vm.Name))
+                .ForMember(m => m.DrinkQuantity, map => map.MapFrom(vm => vm.DrinkQuantity))
+                .ForMember(m => m.Price, map => map.MapFrom(vm => vm.Price));
+            #endregion
+
+            #region 
+
+            #endregion
         }
     }
 }

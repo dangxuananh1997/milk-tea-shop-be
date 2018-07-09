@@ -15,9 +15,14 @@ namespace DependencyResolver.Modules
         {
             Bind<IIdentityService>().To<IdentityAdapter>();
             Bind<IIdentityProvider>().To<IdentityProvider>();
+            Bind<IPagination>().To<PaginationService>();
             Bind<IProductService>().To<ProductService>();
             Bind<IProductVariantService>().To<ProductVariantService>();
-            Bind<IPagination>().To<PaginationService>();
+            Bind<ICouponPackageService>().To<CouponPackageService>();
+            Bind<ICouponItemService>().To<CouponItemService>();
+            Bind<IOrderService>().To<OrderService>();
+            Bind<IOrderDetailService>().To<OrderDetailService>();
+            Bind<IUserService>().To<UserService>();
 
         }
     }

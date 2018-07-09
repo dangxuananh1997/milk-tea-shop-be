@@ -1,7 +1,6 @@
 ﻿namespace API.MilkteaAdmin.Models
 {
     using Core.ObjectModel.Entity;
-    using System.Collections.Generic;
 
     public class ProductVariantVM
     {

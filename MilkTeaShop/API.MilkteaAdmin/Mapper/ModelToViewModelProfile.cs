@@ -25,6 +25,12 @@ namespace API.MilkteaAdmin.Mapper
                 .ForMember(vm => vm.Id, map => map.MapFrom(m => m.Id))
                 .ForMember(vm => vm.Username, map => map.MapFrom(m => m.Username))
                 .ForMember(vm => vm.FullName, map => map.MapFrom(m => m.FullName));
+
+            CreateMap<CouponPackage, CouponPackageVM>()
+                .ForMember(vm => vm.Id, map => map.MapFrom(m => m.Id))
+                .ForMember(vm => vm.Name, map => map.MapFrom(m => m.Name))
+                .ForMember(vm => vm.DrinkQuantity, map => map.MapFrom(m => m.DrinkQuantity))
+                .ForMember(vm => vm.Price, map => map.MapFrom(m => m.Price));
         }
     }
 }
