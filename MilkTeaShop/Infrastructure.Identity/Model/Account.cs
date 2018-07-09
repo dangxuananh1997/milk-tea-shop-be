@@ -6,7 +6,6 @@ namespace Infrastructure.Identity.Model
 
     public class Account : IdentityUser
     {
-        public int UserId { get; set; }
         public UserType UserType { get; set; }
 
         public Account()

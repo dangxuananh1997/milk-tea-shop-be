@@ -7,7 +7,7 @@ namespace Infrastructure.Identity.Database
 
     public class IdentityContext : IdentityDbContext<Account>
     {
-        public IdentityContext() : base("MilkteaCnn1")
+        public IdentityContext() : base("MilkteaCnn")
         {
 
         }
@@ -15,8 +15,7 @@ namespace Infrastructure.Identity.Database
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Account>().Property(_ => _.UserId).IsRequired();
+            
             modelBuilder.Entity<Account>().Property(_ => _.UserType).IsRequired();
         }
 

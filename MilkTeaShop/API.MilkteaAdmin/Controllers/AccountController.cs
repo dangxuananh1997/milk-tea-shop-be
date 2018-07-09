@@ -35,6 +35,7 @@ namespace API.MilkteaAdmin.Controllers
                 return BadRequest(ModelState);
             }
 
+            // Create User account in AspNetUsers
             SystemIdentityResult result = await this._identityService.Register(account.Email, account.Password);
 
 
@@ -46,9 +47,11 @@ namespace API.MilkteaAdmin.Controllers
             }
             else
             {
+                // Create user info in User
                 User user = AutoMapper.Mapper.Map<RegisterBindingModel, User>(account);
                 _userService.CreateUser(user);
-                return Ok();
+                _userService.SaveUserChanges();
+                return Ok(user);
             }
         }
 

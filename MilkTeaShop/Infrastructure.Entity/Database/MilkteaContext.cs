@@ -7,7 +7,7 @@ namespace Infrastructure.Entity.Database
 {
     public class MilkteaContext : DbContext
     {
-        public MilkteaContext() : base("MilkteaCnn1")
+        public MilkteaContext() : base("MilkteaCnn")
         {
 
         }

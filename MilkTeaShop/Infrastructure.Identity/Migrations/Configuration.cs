@@ -50,7 +50,6 @@ namespace Infrastructure.Identity.Migrations
                 var user = new Account();
                 user.UserName = "duong@gmail.com";
                 user.Email = "duong@gmail.com";
-                user.UserId = 1; 
                 user.UserType = UserType.Administrator;
                 string userPWD = "123456";
 

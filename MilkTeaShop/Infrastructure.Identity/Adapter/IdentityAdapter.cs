@@ -2,6 +2,7 @@
 namespace Infrastructure.Identity.Adapter
 {
     using Core.AppService.Database.Identity;
+    using Core.ObjectModel.Entity;
     using Core.ObjectModel.Identity;
     using Infrastructure.Identity.Model;
     using Infrastructure.Identity.Service;
@@ -11,6 +12,7 @@ namespace Infrastructure.Identity.Adapter
     using System.Data.Entity;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using System.Transactions;
 
     public class IdentityAdapter : IIdentityService
     {
@@ -71,13 +73,22 @@ namespace Infrastructure.Identity.Adapter
         public async Task<SystemIdentityResult> Register(string username, string password)
         {
             SystemIdentityResult result = new SystemIdentityResult();
-
-            IdentityResult user = await this._accountService.CreateAsync(new Account { UserName = username, Email = username }, password);
-
-            if (!user.Succeeded)
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                result.Errors.AddRange(user.Errors);
+                
+                Account account = new Account { UserName = username, Email = username };
+
+                IdentityResult user = await this._accountService.CreateAsync(account, password);
+                _accountService.AddToRole(account.Id, UserType.Member.ToString());
+
+                if (!user.Succeeded)
+                {
+                    result.Errors.AddRange(user.Errors);
+                }
+
+                scope.Complete();
             }
+            
             return result;
         }
 

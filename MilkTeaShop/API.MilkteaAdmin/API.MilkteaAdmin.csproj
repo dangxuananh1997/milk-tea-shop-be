@@ -164,11 +164,13 @@
     <Compile Include="Mapper\ModelToViewModelProfile.cs" />
     <Compile Include="Mapper\ViewModelToModelProfile.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\CouponItemModels.cs" />
     <Compile Include="Models\CouponPackageModels.cs" />
     <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Models\ProductVariantModels.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\UserModels.cs" />
+    <Compile Include="Models\UserCouponPackageModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\CustomOAuthorAuthorization.cs" />
     <Compile Include="Startup.cs" />

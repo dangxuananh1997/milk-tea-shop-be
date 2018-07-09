@@ -20,6 +20,7 @@ namespace DependencyResolver.Modules
             Bind<IProductVariantService>().To<ProductVariantService>();
             Bind<ICouponPackageService>().To<CouponPackageService>();
             Bind<ICouponItemService>().To<CouponItemService>();
+            Bind<IUserCouponPackageService>().To<UserCouponPackageService>();
             Bind<IOrderService>().To<OrderService>();
             Bind<IOrderDetailService>().To<OrderDetailService>();
             Bind<IUserService>().To<UserService>();

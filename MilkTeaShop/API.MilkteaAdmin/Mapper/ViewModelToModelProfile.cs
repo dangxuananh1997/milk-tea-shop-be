@@ -60,7 +60,33 @@
             #endregion
 
             #region 
+            CreateMap<CouponItemCM, CouponItem>()
+                .ForMember(m => m.DateExpired, map => map.MapFrom(vm => vm.DateExpired))
+                .ForMember(m => m.IsUsed, map => map.MapFrom(vm => vm.IsUsed))
+                .ForMember(m => m.UserPackageId, map => map.MapFrom(vm => vm.UserPackageId));
 
+            CreateMap<CouponItemUM, CouponItem>()
+                .ForMember(m => m.Id, map => map.MapFrom(vm => vm.Id))
+                .ForMember(m => m.DateExpired, map => map.MapFrom(vm => vm.DateExpired))
+                .ForMember(m => m.IsUsed, map => map.MapFrom(vm => vm.IsUsed))
+                .ForMember(m => m.UserPackageId, map => map.MapFrom(vm => vm.UserPackageId));
+            #endregion
+
+            #region UserCouponPackage
+            CreateMap<UserCouponPackageCM, UserCouponPackage>()
+                .ForMember(vm => vm.DrinkQuantity, map => map.MapFrom(m => m.DrinkQuantity))
+                .ForMember(vm => vm.Price, map => map.MapFrom(m => m.Price))
+                .ForMember(vm => vm.PurchasedDate, map => map.MapFrom(m => m.PurchasedDate))
+                .ForMember(vm => vm.UserId, map => map.MapFrom(m => m.UserId))
+                .ForMember(vm => vm.CouponPackageId, map => map.MapFrom(m => m.CouponPackageId));
+
+            CreateMap<UserCouponPackageUM, UserCouponPackage>()
+                .ForMember(vm => vm.Id, map => map.MapFrom(m => m.Id))
+                .ForMember(vm => vm.DrinkQuantity, map => map.MapFrom(m => m.DrinkQuantity))
+                .ForMember(vm => vm.Price, map => map.MapFrom(m => m.Price))
+                .ForMember(vm => vm.PurchasedDate, map => map.MapFrom(m => m.PurchasedDate))
+                .ForMember(vm => vm.UserId, map => map.MapFrom(m => m.UserId))
+                .ForMember(vm => vm.CouponPackageId, map => map.MapFrom(m => m.CouponPackageId));
             #endregion
         }
     }
