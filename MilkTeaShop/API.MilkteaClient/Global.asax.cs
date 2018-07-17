@@ -1,4 +1,5 @@
-﻿using System;
+﻿using API.MilkteaAdmin.Mapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,7 @@ namespace API.MilkteaClient
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            AutoMapperConfiguration.Configure();
         }
     }
 }

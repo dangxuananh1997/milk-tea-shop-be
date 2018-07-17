@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core.ObjectModel.Entity
 {
@@ -9,10 +10,10 @@ namespace Core.ObjectModel.Entity
         public decimal TotalPrice { get; set; }
         public PaymentType PaymentType { get; set; }
         public string Status { get; set; }
-        public int CouponItemId { get; set; }
+        public DateTime OrderDate { get; set; }
 
         public User User { get; set; }
-        public CouponItem CouponItem { get; set; }
+        public ICollection<CouponItem> CouponItems { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

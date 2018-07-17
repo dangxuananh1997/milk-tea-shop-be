@@ -13,6 +13,8 @@ namespace API.MilkteaAdmin.Models
         public decimal Price { get; set; }
         public int UserId { get; set; }
         public DateTime PurchasedDate { get; set; }
+
+        public List<CouponItemCM> CouponItems { get; set; }
     }
 
     public class UserCouponPackageCM

@@ -11,6 +11,8 @@
 
         User GetUser(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes);
 
+        User GetUserAsNoTracking(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes);
+
         IQueryable<User> GetAllUser(params Expression<Func<User, object>>[] includes);
 
         void CreateUser(User user);

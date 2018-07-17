@@ -47,19 +47,63 @@ namespace Infrastructure.Identity.Migrations
                 
                 //Here we create a Admin super user who will maintain the website                  
 
+                //var user = new Account();
+                //user.UserName = "duong@gmail.com";
+                //user.Email = "duong@gmail.com";
+                //user.UserType = UserType.Administrator;
+                //string userPWD = "123456";
+
+                //var chkUser = userManager.Create(user, userPWD);
+
+                //if (chkUser.Succeeded)
+                //{
+                //    userManager.AddToRole(user.Id, UserType.Administrator.ToString());
+                //}
+
+                //for (int i = 1; i <= 10; i++)
+                //{
+                //    user = new Account();
+                //    user.UserName = "quan" + i + "@gmail.com";
+                //    user.Email = "quan" + i + "@gmail.com";
+                //    user.UserType = UserType.Member;
+                //    userPWD = "123456";
+
+                //    chkUser = userManager.Create(user, userPWD);
+
+                //    if (chkUser.Succeeded)
+                //    {
+                //        userManager.AddToRole(user.Id, UserType.Member.ToString());
+                //    }
+                //}
+                
+            }
+
+            //var user = new Account();
+            //user.UserName = "duong@gmail.com";
+            //user.Email = "duong@gmail.com";
+            //user.UserType = UserType.Administrator;
+            //string userPWD = "123456";
+
+            //var chkUser = userManager.Create(user, userPWD);
+
+            //if (chkUser.Succeeded)
+            //{
+            //    userManager.AddToRole(user.Id, UserType.Administrator.ToString());
+            //}
+            for (int i = 1; i <= 10; i++)
+            {
                 var user = new Account();
-                user.UserName = "duong@gmail.com";
-                user.Email = "duong@gmail.com";
-                user.UserType = UserType.Administrator;
+                user.UserName = "quan" + i + "@gmail.com";
+                user.Email = "quan" + i + "@gmail.com";
+                user.UserType = UserType.Member;
                 string userPWD = "123456";
 
                 var chkUser = userManager.Create(user, userPWD);
 
                 if (chkUser.Succeeded)
                 {
-                    userManager.AddToRole(user.Id, UserType.Administrator.ToString());
+                    userManager.AddToRole(user.Id, UserType.Member.ToString());
                 }
-                
             }
         }
     }

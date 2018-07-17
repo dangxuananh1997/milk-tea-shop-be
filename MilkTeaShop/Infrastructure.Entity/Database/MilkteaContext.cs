@@ -19,7 +19,7 @@ namespace Infrastructure.Entity.Database
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<UserCouponPackage> MyProperty { get; set; }
+        public DbSet<UserCouponPackage> UserCouponPackage { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -29,18 +29,21 @@ namespace Infrastructure.Entity.Database
             modelBuilder.Entity<CouponItem>().HasKey(_ => _.Id);
             modelBuilder.Entity<CouponItem>().Property(_ => _.DateExpired);
             modelBuilder.Entity<CouponItem>().Property(_ => _.IsUsed);
+            modelBuilder.Entity<CouponItem>().Property(_ => _.OrderId).IsOptional();
 
             modelBuilder.Entity<CouponPackage>().ToTable("CouponPackage");
             modelBuilder.Entity<CouponPackage>().HasKey(_ => _.Id);
             modelBuilder.Entity<CouponPackage>().Property(_ => _.Name);
             modelBuilder.Entity<CouponPackage>().Property(_ => _.DrinkQuantity);
             modelBuilder.Entity<CouponPackage>().Property(_ => _.Price);
+            modelBuilder.Entity<CouponPackage>().Property(_ => _.Picture);
 
             modelBuilder.Entity<Order>().ToTable("Order");
             modelBuilder.Entity<Order>().HasKey(_ => _.Id);
             modelBuilder.Entity<Order>().Property(_ => _.PaymentType);
             modelBuilder.Entity<Order>().Property(_ => _.TotalPrice);
             modelBuilder.Entity<Order>().Property(_ => _.Status);
+            modelBuilder.Entity<Order>().Property(_ => _.OrderDate).IsOptional();
 
             modelBuilder.Entity<OrderDetail>().ToTable("OrderDetail");
             modelBuilder.Entity<OrderDetail>().HasKey(_ => _.Id);
@@ -65,6 +68,9 @@ namespace Infrastructure.Entity.Database
                     IndexAnnotation.AnnotationName,
                             new IndexAnnotation(
                             new IndexAttribute("IX_Username", 1) { IsUnique = true }));
+            modelBuilder.Entity<User>().Property(_ => _.Address);
+            modelBuilder.Entity<User>().Property(_ => _.Phone);
+            modelBuilder.Entity<User>().Property(_ => _.Avatar);
 
             modelBuilder.Entity<UserCouponPackage>().ToTable("UserCouponPackage");
             modelBuilder.Entity<UserCouponPackage>().HasKey(_ => _.Id);
@@ -97,12 +103,14 @@ namespace Infrastructure.Entity.Database
                 .HasForeignKey(_ => _.OrderId);
 
             modelBuilder.Entity<Order>()
-                .HasOptional(_ => _.CouponItem)
-                .WithRequired(_ => _.Order);
+                .HasMany(_ => _.CouponItems)
+                .WithOptional(_ => _.Order)
+                .HasForeignKey(_ => _.OrderId);
 
             modelBuilder.Entity<ProductVariant>()
-                .HasOptional(_ => _.OrderDetail)
-                .WithRequired(_ => _.ProductVariant);
+                .HasMany(_ => _.OrderDetails)
+                .WithRequired(_ => _.ProductVariant)
+                .HasForeignKey(_ => _.ProductVariantId);
 
             modelBuilder.Entity<Product>()
                 .HasMany(_ => _.ProductVariants)

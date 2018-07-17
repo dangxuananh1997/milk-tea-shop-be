@@ -54,6 +54,11 @@ namespace Infrastructure.Entity.Repositories
             return this.GetAll(includes).FirstOrDefault(predicated);
         }
 
+        public T GetAsNoTracking(Expression<System.Func<T, bool>> predicated, params Expression<System.Func<T, object>>[] includes)
+        {
+            return this.GetAll(includes).AsNoTracking().FirstOrDefault(predicated);
+        }
+
         public IQueryable<T> GetAll(params Expression<System.Func<T, object>>[] includes)
         {
             IQueryable<T> result = this._dbSet;

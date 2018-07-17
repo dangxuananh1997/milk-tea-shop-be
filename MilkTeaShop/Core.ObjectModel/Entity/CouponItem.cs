@@ -8,6 +8,7 @@ namespace Core.ObjectModel.Entity
         public DateTime DateExpired { get; set; }
         public bool IsUsed { get; set; }
         public int UserPackageId { get; set; }
+        public int? OrderId { get; set; }
 
         public Order Order { get; set; }
         public UserCouponPackage UserCouponPackage { get; set; }

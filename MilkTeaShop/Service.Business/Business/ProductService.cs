@@ -44,6 +44,11 @@ namespace Service.Business.Business
             return base.Get(predicated, includes);
         }
 
+        public Product GetProductAsNoTracking(Expression<Func<Product, bool>> predicated, params Expression<Func<Product, object>>[] includes)
+        {
+            return base.GetAsNoTracking(predicated, includes);
+        }
+
         public void UpdateProduct(Product product)
         {
             base.Update(product);

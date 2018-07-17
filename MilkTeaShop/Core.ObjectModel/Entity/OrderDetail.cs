@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Core.ObjectModel.Entity
+﻿namespace Core.ObjectModel.Entity
 {
     public class OrderDetail
     {

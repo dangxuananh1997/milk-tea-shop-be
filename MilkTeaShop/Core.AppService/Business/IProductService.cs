@@ -11,6 +11,8 @@
 
         Product GetProduct(Expression<Func<Product, bool>> predicated, params Expression<Func<Product, object>>[] includes);
 
+        Product GetProductAsNoTracking(Expression<Func<Product, bool>> predicated, params Expression<Func<Product, object>>[] includes);
+
         IQueryable<Product> GetAllProduct(params Expression<Func<Product, object>>[] includes);
 
         void CreateProduct(Product product);

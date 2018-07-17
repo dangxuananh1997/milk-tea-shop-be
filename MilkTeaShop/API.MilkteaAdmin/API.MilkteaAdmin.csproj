@@ -95,6 +95,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -140,18 +141,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="ConstantManager\ConstantDataManager.cs" />
-    <Compile Include="ConstantManager\ErrorMessage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CouponItemsController.cs" />
     <Compile Include="Controllers\CouponPackagesController.cs" />
-    <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ProductVariantsController.cs" />
@@ -166,6 +165,8 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CouponItemModels.cs" />
     <Compile Include="Models\CouponPackageModels.cs" />
+    <Compile Include="Models\OrderDetailModels.cs" />
+    <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Models\ProductVariantModels.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
@@ -201,6 +202,10 @@
     <ProjectReference Include="..\DependencyResolver\DependencyResolver.csproj">
       <Project>{7EB44CAC-ECAC-4136-854A-46046217FF83}</Project>
       <Name>DependencyResolver</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Entity\Infrastructure.Entity.csproj">
+      <Project>{1BD7026C-03EA-44A2-BE46-82A739E4EFFD}</Project>
+      <Name>Infrastructure.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

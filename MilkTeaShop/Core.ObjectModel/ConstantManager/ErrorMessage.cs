@@ -1,4 +1,4 @@
-﻿namespace API.MilkteaAdmin.ConstantManager
+﻿namespace Core.ObjectModel.ConstantManager
 {
     public class ErrorMessage
     {

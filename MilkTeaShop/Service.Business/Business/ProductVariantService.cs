@@ -16,7 +16,14 @@ namespace Service.Business.Business
 
         public void CreateProductVariant(ProductVariant productVariant)
         {
-            base.Create(productVariant);
+            if (this.GetProductVariant(_ => _.ProductId == productVariant.ProductId && _.Size == productVariant.Size) == null)
+            {
+                base.Create(productVariant);
+            }
+            else
+            {
+                throw new ArgumentException("Already existed a product of this size");
+            }
         }
 
         public void DeleteProductVariant(ProductVariant productVariant)

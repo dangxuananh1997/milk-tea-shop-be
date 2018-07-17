@@ -27,6 +27,11 @@
             return this._repository.Get(predicated, includes);
         }
 
+        protected virtual T GetAsNoTracking(Expression<Func<T, bool>> predicated, params Expression<Func<T, object>>[] includes)
+        {
+            return this._repository.GetAsNoTracking(predicated, includes);
+        }
+
         protected virtual IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes)
         {
             return this._repository.GetAll(includes);

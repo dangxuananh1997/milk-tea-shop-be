@@ -11,6 +11,8 @@
 
         CouponPackage GetCouponPackage(Expression<Func<CouponPackage, bool>> predicated, params Expression<Func<CouponPackage, object>>[] includes);
 
+        CouponPackage GetCouponPackageAsNoTracking(Expression<Func<CouponPackage, bool>> predicated, params Expression<Func<CouponPackage, object>>[] includes);
+
         IQueryable<CouponPackage> GetAllCouponPackage(params Expression<Func<CouponPackage, object>>[] includes);
 
         void CreateCouponPackage(CouponPackage couponPackage);

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstantManager\ConstantDataManager.cs" />
+    <Compile Include="ConstantManager\ErrorMessage.cs" />
     <Compile Include="Entity\CouponItem.cs" />
     <Compile Include="Entity\CouponPackage.cs" />
     <Compile Include="Entity\EnumType.cs" />
@@ -50,6 +52,7 @@
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\UserCouponPackage.cs" />
     <Compile Include="Identity\SystemIdentityResult.cs" />
+    <Compile Include="Pagination\Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

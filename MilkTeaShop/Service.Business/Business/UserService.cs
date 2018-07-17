@@ -43,6 +43,11 @@ namespace Service.Business.Business
             return base.Get(predicated, includes);
         }
 
+        public User GetUserAsNoTracking(Expression<Func<User, bool>> predicated, params Expression<Func<User, object>>[] includes)
+        {
+            return base.GetAsNoTracking(predicated, includes);
+        }
+
         public void SaveUserChanges()
         {
             base.SaveChanges();

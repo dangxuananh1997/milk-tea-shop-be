@@ -1,6 +1,6 @@
-﻿using API.MilkteaAdmin.ConstantManager;
-using API.MilkteaAdmin.Models;
+﻿using API.MilkteaAdmin.Models;
 using Core.AppService.Business;
+using Core.ObjectModel.ConstantManager;
 using Core.ObjectModel.Entity;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +32,6 @@ namespace API.MilkteaAdmin.Controllers
                     .Map<List<ProductVariant>, List<ProductVariantVM>>
                     (_productVariantService.GetAllProductVariant(_ => _.Product)
                     .Where(_ => _.ProductId == productId).ToList());
-
                 return Ok(productVariantVMs);
             }
             catch (System.Exception e)

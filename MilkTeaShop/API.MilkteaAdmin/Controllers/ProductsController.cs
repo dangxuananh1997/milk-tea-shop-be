@@ -1,8 +1,9 @@
-﻿using API.MilkteaAdmin.ConstantManager;
-using API.MilkteaAdmin.Models;
+﻿using API.MilkteaAdmin.Models;
 using Core.AppService.Business;
 using Core.AppService.Pagination;
+using Core.ObjectModel.ConstantManager;
 using Core.ObjectModel.Entity;
+using Core.ObjectModel.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -49,14 +50,14 @@ namespace API.MilkteaAdmin.Controllers
                 }
 
                 List<ProductVM> productVMs = AutoMapper.Mapper.Map<List<Product>, List<ProductVM>>(products);
-                List<ProductVM> result = _pagination.ToPagedList<ProductVM>(pageIndex, ConstantDataManager.PAGESIZE, productVMs);
+                Pager<ProductVM> result = _pagination.ToPagedList<ProductVM>(pageIndex, ConstantDataManager.PAGESIZE, productVMs);
                 return Ok(result);
             }
             catch (Exception e)
             {
                 return InternalServerError(e);
             }
-            
+
         }
 
         [HttpGet]
@@ -90,19 +91,22 @@ namespace API.MilkteaAdmin.Controllers
                 _productService.SaveProductChanges();
                 if (!String.IsNullOrEmpty(cm.Picture))
                 {
+
                     // image stream
                     var bytes = Convert.FromBase64String(cm.Picture);
                     // physical server path
                     string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
+                    Guid guid = Guid.NewGuid();
                     // SAVE IMAGE TO SERVER
+
                     Image image;
                     using (MemoryStream ms = new MemoryStream(bytes))
                     {
                         image = Image.FromStream(ms);
-                        image.Save(filePath + product.Id + ".jpg");
+                        image.Save(filePath + guid + ".jpg");
                     }
                     // UPDATE IMAGE PATH
-                    product.Picture = "/Media/Product/" + product.Id + ".jpg";
+                    product.Picture = "/Media/Product/" + guid + ".jpg";
                     _productService.UpdateProduct(product);
                     _productService.SaveProductChanges();
                 }
@@ -113,7 +117,7 @@ namespace API.MilkteaAdmin.Controllers
             catch (Exception e)
             {
                 return InternalServerError(e);
-            }   
+            }
         }
 
         [HttpPut]
@@ -121,38 +125,59 @@ namespace API.MilkteaAdmin.Controllers
         {
             try
             {
-                Product product = AutoMapper.Mapper.Map<ProductUM, Product>(um);
+                Product updateProduct = AutoMapper.Mapper.Map<ProductUM, Product>(um);
+                Product oldProduct = _productService.GetProductAsNoTracking(p => p.Id == um.Id);
 
                 if (!um.Picture.Contains("/Media/Product/"))
                 {
-                    // PHYSICAL PATH
-                    string filePath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
-                    // IMAGE STREAM
+                    // DELETE OLD PICTURE
+                    // physical path to folder contain product picture
+                    string folderPath = System.Web.HttpContext.Current.Server.MapPath("~/Media/Product/");
+                    // physical path to this product picture
+                    string physicalPath = null;
+                    if (!String.IsNullOrEmpty(oldProduct.Picture))
+                    {
+                        physicalPath = folderPath + oldProduct.Picture.Substring(oldProduct.Picture.LastIndexOf("/") + 1);
+                    }
+                    // delete old picture
+                    if (File.Exists(physicalPath))
+                    {
+                        File.Delete(physicalPath);
+                    }
+
+
+                    // MAPPING NEW PICTURE
+                    // new Guid
+                    Guid newGuid = Guid.NewGuid();
+                    // image stream
                     var bytes = Convert.FromBase64String(um.Picture);
-                    // SAVE IMAGE TO SERVER
+                    // save image to server
                     Image image;
                     using (MemoryStream ms = new MemoryStream(bytes))
                     {
                         image = Image.FromStream(ms);
-                        image.Save(filePath + um.Id + ".jpg");
+                        image.Save(folderPath + newGuid + ".jpg");
                     }
+                    updateProduct.Picture = "/Media/Product/" + newGuid + ".jpg";
+                }
+                else
+                {
+                    updateProduct.Picture = oldProduct.Picture;
                 }
 
                 // UPDATE
-                product.Picture = "/Media/Product/" + product.Id + ".jpg";
-
-                _productService.UpdateProduct(product);
+                _productService.UpdateProduct(updateProduct);
                 _productService.SaveProductChanges();
 
                 // RESPONSE
-                ProductVM productVM = AutoMapper.Mapper.Map<Product, ProductVM>(product);
+                ProductVM productVM = AutoMapper.Mapper.Map<Product, ProductVM>(updateProduct);
                 return Ok(productVM);
             }
             catch (Exception e)
             {
                 return InternalServerError(e);
             }
-            
+
         }
 
         [HttpDelete]
@@ -174,7 +199,7 @@ namespace API.MilkteaAdmin.Controllers
             {
                 return InternalServerError(e);
             }
-            
+
         }
     }
 }

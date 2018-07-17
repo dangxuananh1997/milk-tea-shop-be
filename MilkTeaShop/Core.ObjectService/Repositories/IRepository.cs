@@ -11,6 +11,8 @@ namespace Core.ObjectService.Repositories
 
         T Get(Expression<Func<T, bool>> predicated, params Expression<Func<T, object>>[] includes);
 
+        T GetAsNoTracking(Expression<Func<T, bool>> predicated, params Expression<Func<T, object>>[] includes);
+
         IQueryable<T> GetAll(params Expression<Func<T, object>>[] includes);
 
         void Create(T entity);

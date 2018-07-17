@@ -46,6 +46,11 @@ namespace Service.Business.Business
             return base.Get(predicated, includes);
         }
 
+        public CouponPackage GetCouponPackageAsNoTracking(Expression<Func<CouponPackage, bool>> predicated, params Expression<Func<CouponPackage, object>>[] includes)
+        {
+            return base.GetAsNoTracking(predicated, includes);
+        }
+
         public void SaveCouponPackageChanges()
         {
             base.SaveChanges();

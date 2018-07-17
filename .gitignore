@@ -332,3 +332,12 @@ MilkTeaShop/API.MilkteaAdmin/Web.config
 /MilkTeaShop/Infrastructure.Identity/Migrations/201807090808242_duong_09072018.cs
 /MilkTeaShop/Infrastructure.Identity/Migrations/201807090808242_duong_09072018.Designer.cs
 /MilkTeaShop/Infrastructure.Identity/Migrations/201807090808242_duong_09072018.resx
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161046113_duong_8.cs
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161046113_duong_8.Designer.cs
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161046113_duong_8.resx
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161304540_duong_123.resx
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161304540_duong_123.Designer.cs
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161304540_duong_123.cs
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161257497_duong_565.resx
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161257497_duong_565.Designer.cs
+/MilkTeaShop/Infrastructure.Entity/Migrations/201807161257497_duong_565.cs
