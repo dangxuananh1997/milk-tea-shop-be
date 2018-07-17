@@ -341,3 +341,4 @@ MilkTeaShop/API.MilkteaAdmin/Web.config
 /MilkTeaShop/Infrastructure.Entity/Migrations/201807161257497_duong_565.resx
 /MilkTeaShop/Infrastructure.Entity/Migrations/201807161257497_duong_565.Designer.cs
 /MilkTeaShop/Infrastructure.Entity/Migrations/201807161257497_duong_565.cs
+MilkTeaShop/API.MilkteaClient/Web.config
