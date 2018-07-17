@@ -13,14 +13,14 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
-    public class ProductsController : ApiController
+    public class CouponPackagesController : ApiController
     {
-        private readonly IProductService _productService;
+        private readonly ICouponPackageService _couponPackageService;
         private readonly IPagination _pagination;
 
-        public ProductsController(IProductService productService, IPagination pagination)
+        public CouponPackagesController(ICouponPackageService couponPackageService, IPagination pagination)
         {
-            this._productService = productService;
+            this._couponPackageService = couponPackageService;
             this._pagination = pagination;
         }
 
@@ -34,20 +34,20 @@ namespace API.MilkteaClient.Controllers
 
             try
             {
-                List<Product> products;
+                List<CouponPackage> couponPackages;
                 if (String.IsNullOrEmpty(searchValue))
                 {
                     // GET ALL
-                    products = _productService.GetAllProduct().ToList();
+                    couponPackages = _couponPackageService.GetAllCouponPackage().ToList();
                 }
                 else
                 {
                     // GET SEARCH RESULT
-                    products = _productService.GetAllProduct().Where(p => p.Name.Contains(searchValue)).ToList();
+                    couponPackages = _couponPackageService.GetAllCouponPackage().Where(p => p.Name.Contains(searchValue)).ToList();
                 }
 
-                List<ProductVM> productVMs = AutoMapper.Mapper.Map<List<Product>, List<ProductVM>>(products);
-                Pager<ProductVM> result = _pagination.ToPagedList<ProductVM>(pageIndex, ConstantDataManager.PAGESIZE, productVMs);
+                List<CouponPackageVM> couponPackageVMs = AutoMapper.Mapper.Map<List<CouponPackage>, List<CouponPackageVM>>(couponPackages);
+                Pager<CouponPackageVM> result = _pagination.ToPagedList<CouponPackageVM>(pageIndex, ConstantDataManager.PAGESIZE, couponPackageVMs);
                 return Ok(result);
             }
             catch (Exception e)
@@ -66,8 +66,9 @@ namespace API.MilkteaClient.Controllers
 
             try
             {
-                var productVM = AutoMapper.Mapper.Map<Product, ProductVM>(_productService.GetProduct(id));
-                return Ok(productVM);
+                CouponPackageVM result = AutoMapper.Mapper.Map<CouponPackage, CouponPackageVM>
+                    (_couponPackageService.GetCouponPackage(id));
+                return Ok(result);
             }
             catch (Exception e)
             {

@@ -44,7 +44,7 @@ namespace API.MilkteaClient
 
         public void Configuration(IAppBuilder app)
         {
-            app.UseCors(CorsOptions.AllowAll);
+            //app.UseCors(CorsOptions.AllowAll);
             //Middleware
             app.UseOAuthAuthorizationServer(new OAuthAuthorizationServerOptions()
             {
