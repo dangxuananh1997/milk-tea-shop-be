@@ -45,6 +45,10 @@ namespace API.MilkteaAdmin.Controllers
         [HttpPost]
         public IHttpActionResult Create(ProductVariantCM cm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 ProductVariant productVariant = AutoMapper.Mapper.Map<ProductVariantCM, ProductVariant>(cm);

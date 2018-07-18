@@ -69,7 +69,11 @@ namespace Infrastructure.Entity.Database
                             new IndexAnnotation(
                             new IndexAttribute("IX_Username", 1) { IsUnique = true }));
             modelBuilder.Entity<User>().Property(_ => _.Address);
-            modelBuilder.Entity<User>().Property(_ => _.Phone);
+            modelBuilder.Entity<User>().Property(_ => _.Phone).IsRequired().HasMaxLength(11)
+                .HasColumnAnnotation(
+                    IndexAnnotation.AnnotationName,
+                            new IndexAnnotation(
+                            new IndexAttribute("IX_Phone", 2) { IsUnique = true })); ;
             modelBuilder.Entity<User>().Property(_ => _.Avatar);
 
             modelBuilder.Entity<UserCouponPackage>().ToTable("UserCouponPackage");

@@ -21,11 +21,6 @@ namespace API.MilkteaAdmin.Controllers
         private readonly IIdentityService _identityService;
         private readonly IUserService _userService;
 
-        /// <summary>
-        /// AccountController Constructor
-        /// </summary>
-        /// <param name="identityService"></param>
-        /// <param name="userService"></param>
         public AccountController(IIdentityService identityService, IUserService userService)
         {
             this._identityService = identityService;
@@ -36,12 +31,19 @@ namespace API.MilkteaAdmin.Controllers
         /// Register an account
         /// </summary>
         /// <remarks>
+        /// - Sample Request:
+        /// 
+        /// {
+        ///     "Username": "01626261307",
+        ///     "Password": "123456",
+        ///     "ConfirmPassword": "123456"
+        /// }
         /// 
         /// </remarks>
-        /// <param name="account">RegisterBindingModel</param>
+        /// <param name="account">RegisterModel</param>
         /// <returns>BadRequest or Ok</returns>
-        /// <response code="200">Returns the newly created item</response>
-        /// <response code="400">If the item is null</response>        
+        /// <response code="200">Returns the newly created user</response>
+        /// <response code="400">Model state invalid</response>        
         [HttpPost]
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register([FromBody]RegisterModel account)
@@ -71,6 +73,24 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Change password
+        /// </summary>
+        /// <remarks>
+        /// - Sample Request:
+        /// 
+        /// {
+        ///     "Username": "01626261307",
+        ///     "OldPassword": "123456",
+        ///     "NewPassword": "somepasswordstring",
+        ///     "ConfirmNewPassword": "somepasswordstring"
+        /// }
+        /// 
+        /// </remarks>
+        /// <param name="account">AccountModel</param>
+        /// <returns>BadRequest or Ok</returns>
+        /// <response code="200">Returns new password</response>
+        /// <response code="400">Model state invalid</response> 
         [HttpPut]
         public async Task<IHttpActionResult> ChangePassword([FromBody]AccountModel account)
         {
@@ -93,7 +113,7 @@ namespace API.MilkteaAdmin.Controllers
                     }
                     else
                     {
-                        return Ok();
+                        return Ok(account.NewPassword);
                     }
                 }
             }

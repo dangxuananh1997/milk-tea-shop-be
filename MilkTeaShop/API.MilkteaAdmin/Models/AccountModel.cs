@@ -6,18 +6,18 @@
     [DataContract(Name = "Account")]
     public class AccountModel
     {
-        [DataMember, StringLength(255, MinimumLength = 2)]
+        [DataMember, StringLength(255, MinimumLength = 6)]
         public string Username { get; set; }
 
-        [DataMember, StringLength(255, MinimumLength = 2)]
-        public string Password { get; set; }
+        [DataMember, StringLength(255, MinimumLength = 6)]
+        public string OldPassword { get; set; }
 
         [DataMember]
-        [Compare("OldPassword")]
         public string NewPassword { get; set; }
 
         [DataMember]
-        public string OldPassword { get; set; }
+        [Compare("ConfirmNewPassword")]
+        public string ConfirmNewPassword { get; set; }
     }
 
     public class RegisterModel

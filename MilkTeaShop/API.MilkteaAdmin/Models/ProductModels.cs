@@ -1,4 +1,6 @@
-﻿namespace API.MilkteaAdmin.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.MilkteaAdmin.Models
 {
     public class ProductVM
     {
@@ -9,6 +11,7 @@
 
     public class ProductCM
     {
+        [StringLength(192, MinimumLength = 5)]
         public string Name { get; set; }
         public string Picture { get; set; }
     }

@@ -37,7 +37,6 @@ namespace API.MilkteaClient.Controllers
             // Create User account in AspNetUsers
             SystemIdentityResult result = await this._identityService.Register(account.Username, account.Password);
 
-
             if (result.IsError)
             {
                 this.AddErrors(result.Errors);

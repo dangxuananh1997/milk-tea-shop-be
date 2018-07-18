@@ -21,6 +21,7 @@ namespace API.MilkteaClient.Models
     {
         public decimal TotalPrice { get; set; }
         public PaymentType PaymentType { get; set; }
+        public string Phone { get; set; }
 
         public ICollection<int?> CouponItemIds { get; set; }
         public ICollection<OrderDetailCM> OrderDetails { get; set; }

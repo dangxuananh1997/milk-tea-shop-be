@@ -50,17 +50,9 @@
   <ItemGroup>
     <Compile Include="Database\MilkteaContext.cs" />
     <Compile Include="Database\MilkteaProvider.cs" />
-    <Compile Include="Migrations\201807161046113_duong_8.cs" />
-    <Compile Include="Migrations\201807161046113_duong_8.Designer.cs">
-      <DependentUpon>201807161046113_duong_8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807161257497_duong_565.cs" />
-    <Compile Include="Migrations\201807161257497_duong_565.Designer.cs">
-      <DependentUpon>201807161257497_duong_565.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807161304540_duong_123.cs" />
-    <Compile Include="Migrations\201807161304540_duong_123.Designer.cs">
-      <DependentUpon>201807161304540_duong_123.cs</DependentUpon>
+    <Compile Include="Migrations\201807180706327_duong.cs" />
+    <Compile Include="Migrations\201807180706327_duong.Designer.cs">
+      <DependentUpon>201807180706327_duong.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,14 +78,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807161046113_duong_8.resx">
-      <DependentUpon>201807161046113_duong_8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807161257497_duong_565.resx">
-      <DependentUpon>201807161257497_duong_565.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807161304540_duong_123.resx">
-      <DependentUpon>201807161304540_duong_123.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807180706327_duong.resx">
+      <DependentUpon>201807180706327_duong.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

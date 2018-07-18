@@ -10,6 +10,8 @@ using System.IO;
 using System;
 using System.Diagnostics;
 using System.Runtime.Remoting.Messaging;
+using System.Web.Http.Description;
+using System.Text.RegularExpressions;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -162,6 +164,7 @@ namespace API.MilkteaAdmin
                         //
 
                         c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/bin", $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+                        c.OperationFilter<FormatXmlCommentProperties>();
 
                         // In contrast to WebApi, Swagger 2.0 does not include the query string component when mapping a URL
                         // to an action. As a result, Swashbuckle will raise an exception if it encounters multiple actions
@@ -222,6 +225,30 @@ namespace API.MilkteaAdmin
                         //
                         //c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
                     });
+        }
+    }
+
+    public class FormatXmlCommentProperties : IOperationFilter
+    {
+        public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+        {
+            operation.description = Formatted(operation.description);
+            operation.summary = Formatted(operation.summary);
+
+        }
+
+        private string Formatted(string text)
+        {
+            if (text == null) return null;
+            
+            string resultString = Regex.Replace(text, @"<code[^>]*>", "<pre>", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Multiline);
+            resultString = Regex.Replace(resultString, @"</code[^>]*>", "</pre>", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Multiline);
+            resultString = Regex.Replace(resultString, @"<!--", "", RegexOptions.Multiline);
+            resultString = Regex.Replace(resultString, @"-->", "", RegexOptions.Multiline);
+            // trim blank leading space
+            resultString = Regex.Replace(resultString, @"  ", " ", RegexOptions.Multiline);
+
+            return resultString;
         }
     }
 }

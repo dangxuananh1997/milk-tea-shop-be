@@ -58,22 +58,22 @@ namespace Infrastructure.Entity.Migrations
                     {
                         ProductId = i,
                         Size = pvSize,
-                        Price = (decimal)(rd.NextDouble() * 50000 + 30000)
+                        Price = (decimal)rd.Next(2, 5) * 10000,
                     });
                 }
             }
 
             context.SaveChanges();
 
-            // ADD USERS
-            for (int i = 1; i <= 10; i++)
-            {
-                context.User.AddOrUpdate(u => u.Username, new User
-                {
-                    Username = "quan" + i + "@gmail.com",
-                });
-            }
-            context.SaveChanges();
+            //// ADD USERS
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    context.User.AddOrUpdate(u => u.Username, new User
+            //    {
+            //        Username = "quan" + i + "@gmail.com",
+            //    });
+            //}
+            //context.SaveChanges();
 
             // ADD COUPONPACKAGES
             for (int i = 1; i <= 10; i++)
@@ -81,54 +81,54 @@ namespace Infrastructure.Entity.Migrations
                 context.CouponPackages.AddOrUpdate(c => c.Id, new CouponPackage
                 {
                     Name = "Package " + i,
-                    Price = (decimal) rd.NextDouble() * 1000000 - 500000,
+                    Price = (decimal) rd.Next(1, 5) * 100000,
                     DrinkQuantity = rd.Next(1, 5)
                 });
             }
             context.SaveChanges();
-            // ADD USER COUPON PACKAGES
-            for (int i = 1; i <= 10; i++)
-            {
-                context.UserCouponPackage.AddOrUpdate(_ => _.Id, new UserCouponPackage
-                {
-                    UserId = i,
-                    CouponPackageId = i,
-                    DrinkQuantity = rd.Next(1, 5),
-                    Price = (decimal)rd.NextDouble() * 1000000 - 500000,
-                    PurchasedDate = DateTime.Now
-                });
-            }
-            context.SaveChanges();
-            // ADD ORDERS
-            for (int i = 1; i <= 10; i++)
-            {
-                context.Orders.AddOrUpdate(o => o.Id, new Order
-                {
-                    PaymentType = PaymentType.Cash,
-                    Status = "Pending",
-                    TotalPrice = (decimal)rd.NextDouble() * 1000000 + 500,
-                    UserId = 1,
-                    OrderDate = DateTime.Now.AddDays(rd.Next(1, 10))
-                });
-            }
-            context.SaveChanges();
+            //// ADD USER COUPON PACKAGES
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    context.UserCouponPackage.AddOrUpdate(_ => _.Id, new UserCouponPackage
+            //    {
+            //        UserId = i,
+            //        CouponPackageId = i,
+            //        DrinkQuantity = rd.Next(1, 5),
+            //        Price = (decimal)rd.NextDouble(1, 5) * 1000000 + 500000,
+            //        PurchasedDate = DateTime.Now
+            //    });
+            //}
+            //context.SaveChanges();
+            //// ADD ORDERS
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    context.Orders.AddOrUpdate(o => o.Id, new Order
+            //    {
+            //        PaymentType = PaymentType.Cash,
+            //        Status = "Pending",
+            //        TotalPrice = (decimal)rd.NextDouble() * 1000000 + 500,
+            //        UserId = 1,
+            //        OrderDate = DateTime.Now.AddDays(rd.Next(1, 10))
+            //    });
+            //}
+            //context.SaveChanges();
 
-            // ADD ORDERDETAILS
-            for (int i = 1; i <= 10; i++)
-            {
-                for (int j = 1; j <= 10; j++)
-                {
-                    context.OrderDetails.AddOrUpdate(o => o.Id, new OrderDetail
-                    {
-                        OrderId = i,
-                        ProductVariantId = j,
-                        Quantity = 1,
-                        UnitPrice = 111
-                    });
-                }
-            }
+            //// ADD ORDERDETAILS
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    for (int j = 1; j <= 10; j++)
+            //    {
+            //        context.OrderDetails.AddOrUpdate(o => o.Id, new OrderDetail
+            //        {
+            //            OrderId = i,
+            //            ProductVariantId = j,
+            //            Quantity = 1,
+            //            UnitPrice = 111
+            //        });
+            //    }
+            //}
 
-            context.SaveChanges();
+            //context.SaveChanges();
 
         }
     }
