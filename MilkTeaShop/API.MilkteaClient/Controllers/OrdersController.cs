@@ -1,4 +1,4 @@
-﻿using API.MilkteaAdmin.Models;
+﻿using API.MilkteaClient.Models;
 using Core.AppService.Business;
 using Core.AppService.Pagination;
 using Core.ObjectModel.ConstantManager;
@@ -10,33 +10,31 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using System.Web;
 
-namespace API.MilkteaAdmin.Controllers
+namespace API.MilkteaClient.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize]
     public class OrdersController : ApiController
     {
         private readonly IOrderService _orderService;
+        private readonly ICouponItemService _couponItemService;
+        private readonly IUserService _userService;
         private readonly IPagination _pagination;
+        private readonly int CURRENT_USER_ID;
 
-        public OrdersController(IOrderService orderService, IPagination pagination)
+
+        public OrdersController(IOrderService orderService, ICouponItemService couponItemService, IUserService userService, IPagination pagination)
         {
             this._orderService = orderService;
+            this._couponItemService = couponItemService;
+            this._userService = userService;
             this._pagination = pagination;
+            string username = HttpContext.Current.User.Identity.GetUserName();
+            CURRENT_USER_ID = _userService.GetUser(u => u.Username.Equals(username)).Id;
         }
-
-        /// <summary>
-        /// Something
-        /// </summary>
-        /// <remarks>
-        /// Sample Request:
-        /// 
-        /// Post
-        /// 
-        /// </remarks>
-        /// <param name="pageIndex"></param>
-        /// <param name="searchValue"></param>
-        /// <returns></returns>
+        
         [HttpGet]
         public IHttpActionResult Get(int pageIndex, string searchValue)
         {
@@ -51,12 +49,12 @@ namespace API.MilkteaAdmin.Controllers
                 if (String.IsNullOrEmpty(searchValue))
                 {
                     // GET ALL
-                    orders = _orderService.GetAllOrder().ToList();
+                    orders = _orderService.GetAllOrder(o => o.UserId == CURRENT_USER_ID).ToList();
                 }
                 else
                 {
                     // GET SEARCH RESULT
-                    orders = _orderService.GetAllOrder().ToList()/*.Where(p => p..Contains(searchValue)).ToList()*/;
+                    orders = _orderService.GetAllOrder(o => o.UserId == CURRENT_USER_ID).ToList()/*.Where(p => p..Contains(searchValue)).ToList()*/;
                 }
 
                 List<OrderVM> orderVMs = AutoMapper.Mapper.Map<List<Order>, List<OrderVM>>(orders);
@@ -72,6 +70,7 @@ namespace API.MilkteaAdmin.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
+
             if (id <= 0)
             {
                 return BadRequest(ErrorMessage.INVALID_ID);
@@ -79,7 +78,7 @@ namespace API.MilkteaAdmin.Controllers
             try
             {
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>
-                    (_orderService.GetOrder(o => o.Id == id, o => o.OrderDetails));
+                    (_orderService.GetOrder(o => o.Id == id && o.UserId == CURRENT_USER_ID, o => o.OrderDetails));
 
                 return Ok(result);
             }
@@ -92,11 +91,27 @@ namespace API.MilkteaAdmin.Controllers
         [HttpPost]
         public IHttpActionResult Create(OrderCM cm)
         {
+            
             try
             {
                 Order model = AutoMapper.Mapper.Map<OrderCM, Order>(cm);
+
+                model.OrderDate = DateTime.Now;
+                model.Status = ConstantDataManager.OrderStatus.PENDING;
+                model.UserId = CURRENT_USER_ID;
+
                 _orderService.CreateOrder(model);
                 _orderService.SaveOrderChanges();
+
+                foreach (int couponItemId in cm.CouponItemIds)
+                {
+                    CouponItem coupon = _couponItemService.GetCouponItem(couponItemId);
+                    coupon.OrderId = model.Id;
+                    _couponItemService.UpdateCouponItem(coupon);
+                    _couponItemService.SaveCouponItemChanges();
+                }
+
+                model = _orderService.GetOrder(o => o.Id == model.Id, o => o.CouponItems, o => o.OrderDetails);
 
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>(model);
                 return Ok(result);

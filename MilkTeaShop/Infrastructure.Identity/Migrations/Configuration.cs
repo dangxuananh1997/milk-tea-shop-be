@@ -90,20 +90,33 @@ namespace Infrastructure.Identity.Migrations
             //{
             //    userManager.AddToRole(user.Id, UserType.Administrator.ToString());
             //}
-            for (int i = 1; i <= 10; i++)
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    var user = new Account();
+            //    user.UserName = "quan" + i + "@gmail.com";
+            //    user.Email = "quan" + i + "@gmail.com";
+            //    user.UserType = UserType.Member;
+            //    string userPWD = "123456";
+
+            //    var chkUser = userManager.Create(user, userPWD);
+
+            //    if (chkUser.Succeeded)
+            //    {
+            //        userManager.AddToRole(user.Id, UserType.Member.ToString());
+            //    }
+            //}
+
+            var user = new Account();
+            user.UserName = "01626261307";
+            //user.Email = "quan" + i + "@gmail.com";
+            user.UserType = UserType.Guess;
+            string userPWD = "123456";
+
+            var chkUser = userManager.Create(user, userPWD);
+
+            if (chkUser.Succeeded)
             {
-                var user = new Account();
-                user.UserName = "quan" + i + "@gmail.com";
-                user.Email = "quan" + i + "@gmail.com";
-                user.UserType = UserType.Member;
-                string userPWD = "123456";
-
-                var chkUser = userManager.Create(user, userPWD);
-
-                if (chkUser.Succeeded)
-                {
-                    userManager.AddToRole(user.Id, UserType.Member.ToString());
-                }
+                userManager.AddToRole(user.Id, UserType.Guess.ToString());
             }
         }
     }

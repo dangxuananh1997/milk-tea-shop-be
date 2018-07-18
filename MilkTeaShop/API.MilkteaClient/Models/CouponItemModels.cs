@@ -8,6 +8,7 @@
         public int UserPackageId { get; set; }
         public DateTime DateExpired { get; set; }
         public bool IsUsed { get; set; }
+        public int? OrderId { get; set; }
     }
 
     public class CouponItemCM
@@ -23,5 +24,6 @@
         public int UserPackageId { get; set; }
         public DateTime DateExpired { get; set; }
         public bool IsUsed { get; set; }
+        public int? OrderId { get; set; }
     }
 }

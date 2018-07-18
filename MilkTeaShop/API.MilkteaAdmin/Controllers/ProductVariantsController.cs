@@ -9,6 +9,7 @@ using System.Web.Http.Cors;
 
 namespace API.MilkteaAdmin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductVariantsController : ApiController
     {
         private readonly IProductVariantService _productVariantService;

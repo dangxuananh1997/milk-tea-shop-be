@@ -76,7 +76,7 @@ namespace Infrastructure.Identity.Adapter
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 
-                Account account = new Account { UserName = username, Email = username };
+                Account account = new Account { UserName = username, PhoneNumber = username };
 
                 IdentityResult user = await this._accountService.CreateAsync(account, password);
                 _accountService.AddToRole(account.Id, UserType.Member.ToString());

@@ -42,6 +42,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>$(OutputPath)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+    <!--<DocumentationFile>-->
+    <!--</DocumentationFile>-->
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
@@ -141,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <EmbeddedResource Include="Styles\SwaggerUI.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -169,7 +175,6 @@
     <Compile Include="Models\OrderModels.cs" />
     <Compile Include="Models\ProductModels.cs" />
     <Compile Include="Models\ProductVariantModels.cs" />
-    <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Models\UserCouponPackageModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -50,7 +50,7 @@ namespace API.MilkteaAdmin
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
                 AllowInsecureHttp = true,
                 Provider = new CustomOAuthorAuthorization(
-                    Kernel.Get<IIdentityService>())
+                    Kernel.Get<IIdentityService>()),
             });
 
             //Middle

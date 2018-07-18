@@ -2,6 +2,14 @@ using System.Web.Http;
 using WebActivatorEx;
 using API.MilkteaAdmin;
 using Swashbuckle.Application;
+using Swashbuckle.Swagger;
+using Core.ObjectModel.Entity;
+using API.MilkteaAdmin.Models;
+using System.Reflection;
+using System.IO;
+using System;
+using System.Diagnostics;
+using System.Runtime.Remoting.Messaging;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -12,7 +20,6 @@ namespace API.MilkteaAdmin
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
-
             GlobalConfiguration.Configuration 
                 .EnableSwagger(c =>
                     {
@@ -56,17 +63,17 @@ namespace API.MilkteaAdmin
                         //
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
-                        //
+
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
                         //    .In("header");
-                        //
+
                         //c.OAuth2("oauth2")
                         //    .Description("OAuth2 Implicit Grant")
                         //    .Flow("implicit")
-                        //    .AuthorizationUrl("http://petstore.swagger.wordnik.com/api/oauth/dialog")
-                        //    //.TokenUrl("https://tempuri.org/token")
+                        //    .AuthorizationUrl("/api/Account/Register")
+                        //    .TokenUrl("/Token")
                         //    .Scopes(scopes =>
                         //    {
                         //        scopes.Add("read", "Read access to protected resources");
@@ -102,7 +109,7 @@ namespace API.MilkteaAdmin
                         // use the "MapType" option when the resulting Schema is a primitive or array type. If you need to alter a
                         // complex Schema, use a Schema filter.
                         //
-                        //c.MapType<ProductType>(() => new Schema { type = "integer", format = "int32" });
+                        //c.MapType<OrderCM>(() => new Schema { type = "enum", format = "int32" });
                         //
                         // If you want to post-modify "complex" Schemas once they've been generated, across the board or for a
                         // specific type, you can wire up one or more Schema filters.
@@ -153,7 +160,8 @@ namespace API.MilkteaAdmin
                         // those comments into the generated docs and UI. You can enable this by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+
+                        c.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "/bin", $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 
                         // In contrast to WebApi, Swagger 2.0 does not include the query string component when mapping a URL
                         // to an action. As a result, Swashbuckle will raise an exception if it encounters multiple actions
@@ -168,7 +176,7 @@ namespace API.MilkteaAdmin
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        //c.InjectStylesheet(containingAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
+                        c.InjectStylesheet(typeof(SwaggerConfig).Assembly, "API.MilkteaAdmin.Styles.SwaggerUI.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's

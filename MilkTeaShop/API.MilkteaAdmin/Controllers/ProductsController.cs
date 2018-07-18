@@ -6,6 +6,7 @@ using Core.ObjectModel.Entity;
 using Core.ObjectModel.Pagination;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,7 @@ using System.Web.Http.Cors;
 
 namespace API.MilkteaAdmin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class ProductsController : ApiController
     {
         private readonly IProductService _productService;
@@ -27,6 +29,12 @@ namespace API.MilkteaAdmin.Controllers
             this._pagination = pagination;
         }
 
+        /// <summary>
+        /// Get Products of 1 page
+        /// </summary>
+        /// <param name="pageIndex">index of requested page</param>
+        /// <param name="searchValue">Seach value</param>
+        /// <returns>Total record and list of current requested page record</returns>
         [HttpGet]
         public IHttpActionResult Get(int pageIndex, string searchValue)
         {

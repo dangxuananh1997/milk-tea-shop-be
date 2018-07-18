@@ -21,8 +21,6 @@ namespace API.MilkteaAdmin.Models
     {
         public decimal TotalPrice { get; set; }
         public PaymentType PaymentType { get; set; }
-        public string Status { get; set; }
-        public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
 
         public ICollection<CouponItemVM> CouponItems { get; set; }

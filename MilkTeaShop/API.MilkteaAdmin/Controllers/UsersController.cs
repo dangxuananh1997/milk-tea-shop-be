@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace API.MilkteaAdmin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class UsersController : ApiController
     {
         private readonly IUserService _userService;

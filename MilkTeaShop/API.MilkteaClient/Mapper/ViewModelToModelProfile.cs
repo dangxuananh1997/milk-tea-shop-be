@@ -46,8 +46,9 @@
                 .ForMember(m => m.Phone, map => map.MapFrom(vm => vm.Phone))
                 .ForMember(m => m.Avatar, map => map.MapFrom(vm => vm.Avatar));
 
-            CreateMap<RegisterBindingModel, User>()
-                .ForMember(m => m.Username, map => map.MapFrom(vm => vm.Email));
+            CreateMap<RegisterModel, User>()
+                .ForMember(m => m.Username, map => map.MapFrom(vm => vm.Username))
+                .ForMember(m => m.Phone, map => map.MapFrom(vm => vm.Username));
             #endregion
 
             #region CouponPackage
@@ -63,7 +64,7 @@
                 .ForMember(m => m.Price, map => map.MapFrom(vm => vm.Price));
             #endregion
 
-            #region 
+            #region  CouponItem
             CreateMap<CouponItemCM, CouponItem>()
                 .ForMember(m => m.DateExpired, map => map.MapFrom(vm => vm.DateExpired))
                 .ForMember(m => m.IsUsed, map => map.MapFrom(vm => vm.IsUsed))
@@ -97,10 +98,6 @@
             CreateMap<OrderCM, Order>()
                 .ForMember(m => m.TotalPrice, map => map.MapFrom(vm => vm.TotalPrice))
                 .ForMember(m => m.PaymentType, map => map.MapFrom(vm => vm.PaymentType))
-                .ForMember(m => m.Status, map => map.MapFrom(m => m.Status))
-                .ForMember(m => m.OrderDate, map => map.MapFrom(vm => vm.OrderDate))
-                .ForMember(m => m.UserId, map => map.MapFrom(vm => vm.UserId))
-                .ForMember(m => m.CouponItems, map => map.MapFrom(vm => vm.CouponItems))
                 .ForMember(m => m.OrderDetails, map => map.MapFrom(vm => vm.OrderDetails));
 
             CreateMap<OrderUM, Order>()
@@ -110,7 +107,6 @@
                 .ForMember(m => m.Status, map => map.MapFrom(m => m.Status))
                 .ForMember(m => m.OrderDate, map => map.MapFrom(vm => vm.OrderDate))
                 .ForMember(m => m.UserId, map => map.MapFrom(m => m.UserId))
-                .ForMember(m => m.CouponItems, map => map.MapFrom(m => m.CouponItems))
                 .ForMember(m => m.OrderDetails, map => map.MapFrom(vm => vm.OrderDetails));
             #endregion
 

@@ -15,20 +15,36 @@ using System.Web.Http.Cors;
 
 namespace API.MilkteaAdmin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class AccountController : ApiController
     {
         private readonly IIdentityService _identityService;
         private readonly IUserService _userService;
 
+        /// <summary>
+        /// AccountController Constructor
+        /// </summary>
+        /// <param name="identityService"></param>
+        /// <param name="userService"></param>
         public AccountController(IIdentityService identityService, IUserService userService)
         {
             this._identityService = identityService;
             this._userService = userService;
         }
 
+        /// <summary>
+        /// Register an account
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <param name="account">RegisterBindingModel</param>
+        /// <returns>BadRequest or Ok</returns>
+        /// <response code="200">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>        
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Register([FromBody]RegisterBindingModel account)
+        public async Task<IHttpActionResult> Register([FromBody]RegisterModel account)
         {
             if (!ModelState.IsValid)
             {
@@ -36,7 +52,7 @@ namespace API.MilkteaAdmin.Controllers
             }
 
             // Create User account in AspNetUsers
-            SystemIdentityResult result = await this._identityService.Register(account.Email, account.Password);
+            SystemIdentityResult result = await this._identityService.Register(account.Username, account.Password);
 
 
             if (result.IsError)
@@ -48,7 +64,7 @@ namespace API.MilkteaAdmin.Controllers
             else
             {
                 // Create user info in User
-                User user = AutoMapper.Mapper.Map<RegisterBindingModel, User>(account);
+                User user = AutoMapper.Mapper.Map<RegisterModel, User>(account);
                 _userService.CreateUser(user);
                 _userService.SaveUserChanges();
                 return Ok(user);

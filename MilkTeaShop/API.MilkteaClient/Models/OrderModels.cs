@@ -21,11 +21,8 @@ namespace API.MilkteaClient.Models
     {
         public decimal TotalPrice { get; set; }
         public PaymentType PaymentType { get; set; }
-        public string Status { get; set; }
-        public DateTime OrderDate { get; set; }
-        public int UserId { get; set; }
 
-        public ICollection<CouponItemVM> CouponItems { get; set; }
+        public ICollection<int?> CouponItemIds { get; set; }
         public ICollection<OrderDetailCM> OrderDetails { get; set; }
     }
 
@@ -38,7 +35,7 @@ namespace API.MilkteaClient.Models
         public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
 
-        public ICollection<CouponItemVM> CouponItems { get; set; }
+        public ICollection<int?> CouponItemIds { get; set; }
         public ICollection<OrderDetailUM> OrderDetails { get; set; }
     }
 }

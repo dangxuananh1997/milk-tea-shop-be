@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace API.MilkteaAdmin.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class UserCouponPackagesController : ApiController
     {
         private readonly IUserCouponPackageService _userCouponPackageService;

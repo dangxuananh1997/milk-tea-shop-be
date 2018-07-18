@@ -46,8 +46,9 @@
                 .ForMember(m => m.Phone, map => map.MapFrom(vm => vm.Phone))
                 .ForMember(m => m.Avatar, map => map.MapFrom(vm => vm.Avatar));
 
-            CreateMap<RegisterBindingModel, User>()
-                .ForMember(m => m.Username, map => map.MapFrom(vm => vm.Email));
+            CreateMap<RegisterModel, User>()
+                .ForMember(m => m.Username, map => map.MapFrom(vm => vm.Username))
+                .ForMember(m => m.Phone, map => map.MapFrom(vm => vm.Username));
             #endregion
 
             #region CouponPackage
@@ -97,10 +98,7 @@
             CreateMap<OrderCM, Order>()
                 .ForMember(m => m.TotalPrice, map => map.MapFrom(vm => vm.TotalPrice))
                 .ForMember(m => m.PaymentType, map => map.MapFrom(vm => vm.PaymentType))
-                .ForMember(m => m.Status, map => map.MapFrom(m => m.Status))
-                .ForMember(m => m.OrderDate, map => map.MapFrom(vm => vm.OrderDate))
                 .ForMember(m => m.UserId, map => map.MapFrom(vm => vm.UserId))
-                .ForMember(m => m.CouponItems, map => map.MapFrom(vm => vm.CouponItems))
                 .ForMember(m => m.OrderDetails, map => map.MapFrom(vm => vm.OrderDetails));
 
             CreateMap<OrderUM, Order>()
@@ -116,7 +114,6 @@
 
             #region OrderDetail
             CreateMap<OrderDetailCM, OrderDetail>()
-                .ForMember(m => m.OrderId, map => map.MapFrom(m => m.OrderId))
                 .ForMember(m => m.ProductVariantId, map => map.MapFrom(m => m.ProductVariantId))
                 .ForMember(m => m.Quantity, map => map.MapFrom(m => m.Quantity))
                 .ForMember(m => m.UnitPrice, map => map.MapFrom(m => m.UnitPrice));

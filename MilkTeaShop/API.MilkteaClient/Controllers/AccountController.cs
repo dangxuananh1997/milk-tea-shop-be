@@ -27,7 +27,7 @@ namespace API.MilkteaClient.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Register([FromBody]RegisterBindingModel account)
+        public async Task<IHttpActionResult> Register([FromBody]RegisterModel account)
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace API.MilkteaClient.Controllers
             }
 
             // Create User account in AspNetUsers
-            SystemIdentityResult result = await this._identityService.Register(account.Email, account.Password);
+            SystemIdentityResult result = await this._identityService.Register(account.Username, account.Password);
 
 
             if (result.IsError)
@@ -47,7 +47,7 @@ namespace API.MilkteaClient.Controllers
             else
             {
                 // Create user info in User
-                User user = AutoMapper.Mapper.Map<RegisterBindingModel, User>(account);
+                User user = AutoMapper.Mapper.Map<RegisterModel, User>(account);
                 _userService.CreateUser(user);
                 _userService.SaveUserChanges();
                 return Ok(user);
