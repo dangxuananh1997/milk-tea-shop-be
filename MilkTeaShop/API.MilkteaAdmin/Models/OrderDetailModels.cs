@@ -1,4 +1,6 @@
-﻿using Core.ObjectModel.Entity;
+﻿using Core.ObjectModel.ConstantManager;
+using Core.ObjectModel.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.MilkteaAdmin.Models
 {
@@ -13,17 +15,39 @@ namespace API.MilkteaAdmin.Models
 
     public class OrderDetailCM
     {
+        [Required]
+        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int ProductVariantId { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
+
+        [Required]
+        [Range(0, int.MaxValue)]
         public decimal UnitPrice { get; set; }
     }
 
     public class OrderDetailUM
     {
+        [Required]
+        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int Id { get; set; }
+
+        [Required]
+        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int OrderId { get; set; }
+
+        [Required]
+        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int ProductVariantId { get; set; }
+
+        [Required]
+        [Range(1, int.MaxValue)]
         public int Quantity { get; set; }
+
+        [Required]
+        [Range(0, int.MaxValue)]
         public decimal UnitPrice { get; set; }
     }
 }

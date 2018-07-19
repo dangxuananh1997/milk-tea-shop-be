@@ -70,6 +70,9 @@ namespace API.MilkteaAdmin.Mapper
                 .ForMember(vm => vm.PaymentType, map => map.MapFrom(m => m.PaymentType))
                 .ForMember(vm => vm.OrderDate, map => map.MapFrom(m => m.OrderDate))
                 .ForMember(vm => vm.UserId, map => map.MapFrom(m => m.UserId))
+                .ForMember(vm => vm.ContactPhone, map => map.MapFrom(m => m.ContactPhone))
+                .ForMember(vm => vm.DeliveryAddress, map => map.MapFrom(m => m.DeliveryAddress))
+                .ForMember(vm => vm.CustomerName, map => map.MapFrom(m => m.CustomerName))
                 .ForMember(vm => vm.CouponItems, map => map.MapFrom(m => m.CouponItems))
                 .ForMember(vm => vm.OrderDetails, map => map.MapFrom(m => m.OrderDetails));
             #endregion

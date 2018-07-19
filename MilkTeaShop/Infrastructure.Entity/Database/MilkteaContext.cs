@@ -44,6 +44,9 @@ namespace Infrastructure.Entity.Database
             modelBuilder.Entity<Order>().Property(_ => _.TotalPrice);
             modelBuilder.Entity<Order>().Property(_ => _.Status);
             modelBuilder.Entity<Order>().Property(_ => _.OrderDate).IsOptional();
+            modelBuilder.Entity<Order>().Property(_ => _.ContactPhone).IsOptional();
+            modelBuilder.Entity<Order>().Property(_ => _.DeliveryAddress).IsOptional();
+            modelBuilder.Entity<Order>().Property(_ => _.CustomerName).IsOptional();
 
             modelBuilder.Entity<OrderDetail>().ToTable("OrderDetail");
             modelBuilder.Entity<OrderDetail>().HasKey(_ => _.Id);

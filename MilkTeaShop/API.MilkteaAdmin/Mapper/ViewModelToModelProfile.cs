@@ -81,7 +81,6 @@
             CreateMap<UserCouponPackageCM, UserCouponPackage>()
                 .ForMember(m => m.DrinkQuantity, map => map.MapFrom(vm => vm.DrinkQuantity))
                 .ForMember(m => m.Price, map => map.MapFrom(vm => vm.Price))
-                .ForMember(m => m.PurchasedDate, map => map.MapFrom(vm => vm.PurchasedDate))
                 .ForMember(m => m.UserId, map => map.MapFrom(vm => vm.UserId))
                 .ForMember(m => m.CouponPackageId, map => map.MapFrom(vm => vm.CouponPackageId));
 
@@ -99,6 +98,9 @@
                 .ForMember(m => m.TotalPrice, map => map.MapFrom(vm => vm.TotalPrice))
                 .ForMember(m => m.PaymentType, map => map.MapFrom(vm => vm.PaymentType))
                 .ForMember(m => m.UserId, map => map.MapFrom(vm => vm.UserId))
+                .ForMember(m => m.ContactPhone, map => map.MapFrom(m => m.ContactPhone))
+                .ForMember(m => m.DeliveryAddress, map => map.MapFrom(m => m.DeliveryAddress))
+                .ForMember(m => m.CustomerName, map => map.MapFrom(m => m.CustomerName))
                 .ForMember(m => m.OrderDetails, map => map.MapFrom(vm => vm.OrderDetails));
 
             CreateMap<OrderUM, Order>()
@@ -108,7 +110,9 @@
                 .ForMember(m => m.Status, map => map.MapFrom(m => m.Status))
                 .ForMember(m => m.OrderDate, map => map.MapFrom(vm => vm.OrderDate))
                 .ForMember(m => m.UserId, map => map.MapFrom(m => m.UserId))
-                .ForMember(m => m.CouponItems, map => map.MapFrom(m => m.CouponItems))
+                .ForMember(m => m.ContactPhone, map => map.MapFrom(m => m.ContactPhone))
+                .ForMember(m => m.DeliveryAddress, map => map.MapFrom(m => m.DeliveryAddress))
+                .ForMember(m => m.CustomerName, map => map.MapFrom(m => m.CustomerName))
                 .ForMember(m => m.OrderDetails, map => map.MapFrom(vm => vm.OrderDetails));
             #endregion
 

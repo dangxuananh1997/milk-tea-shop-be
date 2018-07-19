@@ -48,6 +48,7 @@ namespace Infrastructure.Identity.Adapter
         {
             SystemIdentityResult result = new SystemIdentityResult();
             Account user = await this._accountService.FindAsync(userName, password);
+
             if (user == null)
             {
                 result.Errors.Add("Invalid Username or Password.");

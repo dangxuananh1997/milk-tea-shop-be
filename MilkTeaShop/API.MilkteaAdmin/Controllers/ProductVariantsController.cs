@@ -66,6 +66,10 @@ namespace API.MilkteaAdmin.Controllers
         [HttpPut]
         public IHttpActionResult Update(ProductVariantUM um)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 ProductVariant productVariant = AutoMapper.Mapper.Map<ProductVariantUM, ProductVariant>(um);

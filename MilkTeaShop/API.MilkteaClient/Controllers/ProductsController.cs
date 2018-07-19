@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
+    [Authorize(Roles = "Member")]
     public class ProductsController : ApiController
     {
         private readonly IProductService _productService;

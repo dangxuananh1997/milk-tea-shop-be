@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
+    [Authorize(Roles = "Member")]
     public class CouponPackagesController : ApiController
     {
         private readonly ICouponPackageService _couponPackageService;

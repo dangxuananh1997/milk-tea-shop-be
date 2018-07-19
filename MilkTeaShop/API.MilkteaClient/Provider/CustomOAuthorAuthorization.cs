@@ -31,6 +31,7 @@ namespace API.MilkteaClient.Provider
             context.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
             SystemIdentityResult result = await _identityService.GrantResourceOwnerCredentials(context.UserName, context.Password, context.Options.AuthenticationType);
+            
 
             if (result.IsError)
             {
@@ -45,7 +46,10 @@ namespace API.MilkteaClient.Provider
         public override Task TokenEndpointResponse(OAuthTokenEndpointResponseContext context)
         {
             var claims = context.Identity.Claims.Where(x => x.Type == ClaimTypes.Role);
-            
+            if (claims.ElementAt(0).Value.Equals(UserType.Administrator.ToString()))
+            {
+                return null;
+            }
             context.AdditionalResponseParameters.Add("role", claims.ElementAt(0).Value);
 
             return base.TokenEndpointResponse(context);

@@ -62,6 +62,7 @@ namespace API.MilkteaAdmin.Controllers
             {
                 UserCouponPackage model = AutoMapper.Mapper.Map<UserCouponPackageCM, UserCouponPackage>(cm);
                 model.CouponItems = new List<CouponItem>();
+                model.PurchasedDate = DateTime.Now;
 
                 // Current hour, minute, second
                 int cHour = model.PurchasedDate.Hour;
@@ -69,13 +70,13 @@ namespace API.MilkteaAdmin.Controllers
                 int cSecond = model.PurchasedDate.Second;
 
                 // CREATE 30 coupon item for this user package
-                for (int i = 0; i < 30; i++)
+                for (int i = 1; i <= 30; i++)
                 {
                     CouponItem newCouponItem = new CouponItem()
                     {
                         IsUsed = false,
                         DateExpired = model.PurchasedDate.AddDays(i)
-                                                    .AddHours(60 - cHour - 1)
+                                                    .AddHours(24 - cHour - 1)
                                                     .AddMinutes(60 - cMinute - 1)
                                                     .AddSeconds(60 - cSecond - 1),
                         OrderId = null

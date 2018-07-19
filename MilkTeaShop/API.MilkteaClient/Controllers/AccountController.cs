@@ -14,6 +14,7 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
+    [Authorize(Roles = "Member")]
     public class AccountController : ApiController
     {
         private readonly IIdentityService _identityService;
@@ -25,6 +26,23 @@ namespace API.MilkteaClient.Controllers
             this._userService = userService;
         }
 
+        /// <summary>
+        /// Register an account
+        /// </summary>
+        /// <remarks>
+        /// - Sample Request:
+        /// 
+        /// {
+        ///     "Username": "01626261307",
+        ///     "Password": "123456",
+        ///     "ConfirmPassword": "123456"
+        /// }
+        /// 
+        /// </remarks>
+        /// <param name="account">RegisterModel</param>
+        /// <returns>BadRequest or Ok</returns>
+        /// <response code="200">Returns the newly created user</response>
+        /// <response code="400">Model state invalid</response>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register([FromBody]RegisterModel account)

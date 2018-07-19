@@ -5,8 +5,10 @@ namespace API.MilkteaAdmin.App_Start
 {
     using System;
     using System.Collections.Generic;
+    using System.Reflection;
     using System.Web;
     using System.Web.Http;
+    using System.Web.Http.Validation;
     using DependencyResolver.Modules;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -18,6 +20,20 @@ namespace API.MilkteaAdmin.App_Start
 
     public static class NinjectWebCommon 
     {
+        private static IKernel kernel;
+
+        public static IKernel Kernel
+        {
+            get
+            {
+                if (kernel == null)
+                {
+                    CreateKernel();
+                }
+                return kernel;
+            }
+        }
+
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
@@ -44,11 +60,12 @@ namespace API.MilkteaAdmin.App_Start
         /// <returns>The created kernel.</returns>
         private static IKernel CreateKernel()
         {
-            var kernel = new StandardKernel();
+            kernel = new StandardKernel();
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+                kernel.Unbind<ModelValidatorProvider>();
                 RegisterServices(kernel);
                 GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
                 return kernel;

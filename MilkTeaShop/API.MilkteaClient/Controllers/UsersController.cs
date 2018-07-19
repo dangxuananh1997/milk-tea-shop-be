@@ -15,6 +15,7 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
+    [Authorize(Roles = "Member")]
     public class UsersController : ApiController
     {
         private readonly IUserService _userService;

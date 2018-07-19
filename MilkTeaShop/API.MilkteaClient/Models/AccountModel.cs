@@ -1,5 +1,6 @@
 ﻿namespace API.MilkteaClient.Models
 {
+    using Core.ObjectModel.ConstantManager;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
 
@@ -23,7 +24,8 @@
     public class RegisterModel
     {
         [Required]
-        //[Display(Name = "Email")]
+        [MinLength(10), MaxLength(11)]
+        [RegularExpression(@"^(\d{10,11})\b", ErrorMessage = ErrorMessage.INVALID_PHONE)]
         public string Username { get; set; }
 
         [Required]
@@ -36,5 +38,8 @@
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [MinLength(2), MaxLength(256)]
+        public string FullName { get; set; }
     }
 }

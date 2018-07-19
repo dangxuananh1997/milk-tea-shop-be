@@ -15,7 +15,7 @@ using System.Web;
 
 namespace API.MilkteaClient.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Member")]
     public class OrdersController : ApiController
     {
         private readonly IOrderService _orderService;
@@ -34,9 +34,9 @@ namespace API.MilkteaClient.Controllers
             string username = HttpContext.Current.User.Identity.GetUserName();
             CURRENT_USER_ID = _userService.GetUser(u => u.Username.Equals(username)).Id;
         }
-        
+
         [HttpGet]
-        public IHttpActionResult Get(int pageIndex, string searchValue)
+        public IHttpActionResult GetAll(int pageIndex)
         {
             if (pageIndex <= 0)
             {
@@ -46,16 +46,9 @@ namespace API.MilkteaClient.Controllers
             try
             {
                 List<Order> orders;
-                if (String.IsNullOrEmpty(searchValue))
-                {
-                    // GET ALL
-                    orders = _orderService.GetAllOrder(o => o.UserId == CURRENT_USER_ID).ToList();
-                }
-                else
-                {
-                    // GET SEARCH RESULT
-                    orders = _orderService.GetAllOrder(o => o.UserId == CURRENT_USER_ID).ToList()/*.Where(p => p..Contains(searchValue)).ToList()*/;
-                }
+
+                // GET ALL
+                orders = _orderService.GetAllOrder().Where(o => o.UserId == CURRENT_USER_ID).ToList();
 
                 List<OrderVM> orderVMs = AutoMapper.Mapper.Map<List<Order>, List<OrderVM>>(orders);
                 Pager<OrderVM> result = _pagination.ToPagedList<OrderVM>(pageIndex, ConstantDataManager.PAGESIZE, orderVMs);
@@ -68,7 +61,7 @@ namespace API.MilkteaClient.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult GetById(int id)
         {
 
             if (id <= 0)
@@ -91,7 +84,7 @@ namespace API.MilkteaClient.Controllers
         [HttpPost]
         public IHttpActionResult Create(OrderCM cm)
         {
-            
+
             try
             {
                 Order model = AutoMapper.Mapper.Map<OrderCM, Order>(cm);

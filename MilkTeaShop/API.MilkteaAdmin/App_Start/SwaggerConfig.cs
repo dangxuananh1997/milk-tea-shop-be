@@ -179,7 +179,7 @@ namespace API.MilkteaAdmin
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        c.InjectStylesheet(typeof(SwaggerConfig).Assembly, "API.MilkteaAdmin.Styles.SwaggerUI.css");
+                        //c.InjectStylesheet(typeof(SwaggerConfig).Assembly, "API.MilkteaAdmin.Styles.SwaggerUI.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's

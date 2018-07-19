@@ -11,6 +11,7 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
+    [Authorize(Roles = "Member")]
     public class ProductVariantsController : ApiController
     {
         private readonly IProductVariantService _productVariantService;

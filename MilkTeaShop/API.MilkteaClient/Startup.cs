@@ -1,4 +1,5 @@
 ﻿using API.MilkteaClient;
+using API.MilkteaClient.App_Start;
 using API.MilkteaClient.Provider;
 using Core.AppService.Database.Identity;
 using DependencyResolver.Modules;
@@ -20,28 +21,6 @@ namespace API.MilkteaClient
 {
     public class Startup
     {
-        private static IKernel _kernel;
-
-        public static IKernel Kernel
-        {
-            get
-            {
-                if (_kernel == null)
-                {
-                    _kernel = new StandardKernel();
-                    _kernel.Load(Assembly.GetExecutingAssembly());
-
-                    List<NinjectModule> modules = new List<NinjectModule>()
-                    {
-                        new InfrastructureModule(),
-                        new ServiceModule()
-                    };
-                    _kernel.Load(modules);
-                }
-                return _kernel;
-            }
-        }
-
         public void Configuration(IAppBuilder app)
         {
             //app.UseCors(CorsOptions.AllowAll);
@@ -52,7 +31,7 @@ namespace API.MilkteaClient
                 AccessTokenExpireTimeSpan = TimeSpan.FromHours(3),
                 AllowInsecureHttp = true,
                 Provider = new CustomOAuthorAuthorization(
-                    Kernel.Get<IIdentityService>())
+                    NinjectWebCommon.Kernel.Get<IIdentityService>())
             });
 
             //Middle

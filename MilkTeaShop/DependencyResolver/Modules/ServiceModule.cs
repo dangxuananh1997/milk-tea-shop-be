@@ -24,7 +24,6 @@ namespace DependencyResolver.Modules
             Bind<IOrderService>().To<OrderService>();
             Bind<IOrderDetailService>().To<OrderDetailService>();
             Bind<IUserService>().To<UserService>();
-
         }
     }
 }
