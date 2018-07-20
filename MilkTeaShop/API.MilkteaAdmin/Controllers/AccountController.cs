@@ -42,7 +42,7 @@ namespace API.MilkteaAdmin.Controllers
         /// </remarks>
         /// <param name="account">RegisterModel</param>
         /// <returns>BadRequest or Ok</returns>
-        /// <response code="200">Returns the newly created user</response>
+        /// <response code="200">Return the newly created user</response>
         /// <response code="400">Model state invalid</response>        
         [HttpPost]
         [AllowAnonymous]
@@ -89,7 +89,7 @@ namespace API.MilkteaAdmin.Controllers
         /// </remarks>
         /// <param name="account">AccountModel</param>
         /// <returns>BadRequest or Ok</returns>
-        /// <response code="200">Returns new password</response>
+        /// <response code="200">Return new password</response>
         /// <response code="400">Model state invalid</response> 
         [HttpPut]
         public async Task<IHttpActionResult> ChangePassword([FromBody]AccountModel account)
@@ -120,6 +120,10 @@ namespace API.MilkteaAdmin.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Add Errors
+        /// </summary>
+        /// <param name="errors"></param>
         private void AddErrors(IList<string> errors)
         {
             for (int i = 0; i < errors.Count; i++)

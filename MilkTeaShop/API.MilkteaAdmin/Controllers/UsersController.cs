@@ -25,6 +25,21 @@ namespace API.MilkteaAdmin.Controllers
             this._pagination = pagination;
         }
 
+        /// <summary>
+        /// Get list Users Paged
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <param name="pageIndex">Page Index</param>
+        /// <param name="searchValue">Search Value</param>
+        /// <returns></returns>
+        /// <response code="200">Return Users</response>
+        /// <response code="400">Invalid Page Index</response> 
+        /// <response code="500">Fail to Retrieve Users</response>
         [HttpGet]
         public IHttpActionResult Get(int pageIndex, string searchValue)
         {
@@ -57,6 +72,20 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Get User By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <param name="id">User Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return User</response>
+        /// <response code="400">Invalid Id</response> 
+        /// <response code="500">Fail to Retrieve User</response>
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -77,9 +106,27 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Create User
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Post
+        /// 
+        /// </remarks>
+        /// <param name="cm">User Create Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Created User</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Create User</response>
         [HttpPost]
         public IHttpActionResult Create(UserCM cm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 User model = AutoMapper.Mapper.Map<UserCM, User>(cm);
@@ -95,9 +142,27 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Update User
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Put
+        /// 
+        /// </remarks>
+        /// <param name="um">User Update Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Updated User</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Update User</response>
         [HttpPut]
         public IHttpActionResult Update(UserUM um)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 User updateUser = AutoMapper.Mapper.Map<UserUM, User>(um);
@@ -154,6 +219,20 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete User By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Delete
+        /// 
+        /// </remarks>
+        /// <param name="id">User Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return Empty</response>
+        /// <response code="400">Invalid User Id</response> 
+        /// <response code="500">Fail to Delete User</response>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {

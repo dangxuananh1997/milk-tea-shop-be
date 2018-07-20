@@ -14,7 +14,6 @@ using System.Web.Http;
 
 namespace API.MilkteaClient.Controllers
 {
-    [Authorize(Roles = "Member")]
     public class AccountController : ApiController
     {
         private readonly IIdentityService _identityService;
@@ -71,6 +70,25 @@ namespace API.MilkteaClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Change password
+        /// </summary>
+        /// <remarks>
+        /// - Sample Request:
+        /// 
+        /// {
+        ///     "Username": "01626261307",
+        ///     "OldPassword": "123456",
+        ///     "NewPassword": "somepasswordstring",
+        ///     "ConfirmNewPassword": "somepasswordstring"
+        /// }
+        /// 
+        /// </remarks>
+        /// <param name="account">AccountModel</param>
+        /// <returns>BadRequest or Ok</returns>
+        /// <response code="200">Returns new password</response>
+        /// <response code="400">Model state invalid</response> 
+
         [HttpPut]
         public async Task<IHttpActionResult> ChangePassword([FromBody]AccountModel account)
         {
@@ -100,6 +118,10 @@ namespace API.MilkteaClient.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Add Errors
+        /// </summary>
+        /// <param name="errors"></param>
         private void AddErrors(IList<string> errors)
         {
             for (int i = 0; i < errors.Count; i++)

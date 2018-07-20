@@ -23,6 +23,18 @@ namespace API.MilkteaAdmin.Controllers
             this._couponItemService = couponItemService;
         }
 
+        /// <summary>
+        /// Get All UserCouponPackages
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <returns></returns>
+        /// <response code="200">Return UserCouponPackages</response>
+        /// <response code="500">Fail to Retrieve UserCouponPackages</response>
         [HttpGet]
         public IHttpActionResult Get()
         {
@@ -39,6 +51,20 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Get UserCouponPackage By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <param name="id">UserCouponPackage Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return UserCouponPackage</response>
+        /// <response code="400">Invalid Id</response> 
+        /// <response code="500">Fail to Retrieve UserCouponPackage</response>
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -55,9 +81,27 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Create UserCouponPackage
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Post
+        /// 
+        /// </remarks>
+        /// <param name="cm">UserCouponPackage Create Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Created UserCouponPackage</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Create UserCouponPackage</response>
         [HttpPost]
         public IHttpActionResult Create(UserCouponPackageCM cm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 UserCouponPackage model = AutoMapper.Mapper.Map<UserCouponPackageCM, UserCouponPackage>(cm);
@@ -96,9 +140,27 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Update UserCouponPackage
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Put
+        /// 
+        /// </remarks>
+        /// <param name="um">UserCouponPackage Update Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Updated UserCouponPackage</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Update UserCouponPackage</response>
         [HttpPut]
         public IHttpActionResult Update(UserCouponPackageUM um)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 UserCouponPackage model = AutoMapper.Mapper.Map<UserCouponPackageUM, UserCouponPackage>(um);
@@ -114,6 +176,20 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete UserCouponPackage By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Delete
+        /// 
+        /// </remarks>
+        /// <param name="id">UserCouponPackage Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return Empty</response>
+        /// <response code="400">Invalid UserCouponPackage Id</response> 
+        /// <response code="500">Fail to Delete UserCouponPackage</response>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {

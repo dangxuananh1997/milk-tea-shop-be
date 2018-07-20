@@ -19,6 +19,20 @@ namespace API.MilkteaAdmin.Controllers
             this._productVariantService = productVariantService;
         }
 
+        /// <summary>
+        /// Get ProductVariant By Product's Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <param name="productId">Product's Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return ProductVariants</response>
+        /// <response code="400">Invalid Product's Id</response> 
+        /// <response code="500">Fail to Retrieve ProductVariants</response>
         [HttpGet]
         public IHttpActionResult Get(int productId)
         {
@@ -42,6 +56,20 @@ namespace API.MilkteaAdmin.Controllers
             
         }
 
+        /// <summary>
+        /// Create ProductVariant
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Post
+        /// 
+        /// </remarks>
+        /// <param name="cm">ProductVariant Create Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Created ProductVariant</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Create ProductVariant</response>
         [HttpPost]
         public IHttpActionResult Create(ProductVariantCM cm)
         {
@@ -63,6 +91,20 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Update ProductVariant
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Put
+        /// 
+        /// </remarks>
+        /// <param name="um">ProductVariant Update Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Updated ProductVariant</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Update ProductVariant</response>
         [HttpPut]
         public IHttpActionResult Update(ProductVariantUM um)
         {
@@ -83,6 +125,20 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete ProductVariant By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Delete
+        /// 
+        /// </remarks>
+        /// <param name="id">ProductVariant Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return Empty</response>
+        /// <response code="400">Invalid ProductVariant Id</response> 
+        /// <response code="500">Fail to Delete ProductVariant</response>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {

@@ -26,17 +26,20 @@ namespace API.MilkteaAdmin.Controllers
         }
 
         /// <summary>
-        /// Something
+        /// Get list Order Paged
         /// </summary>
         /// <remarks>
         /// Sample Request:
         /// 
-        /// Post
+        /// Get
         /// 
         /// </remarks>
         /// <param name="pageIndex"></param>
         /// <param name="searchValue"></param>
         /// <returns></returns>
+        /// <response code="200">Return Orders</response>
+        /// <response code="400">Invalid Page Index (Negative)</response> 
+        /// <response code="500">Fail to Retrieve Orders</response>
         [HttpGet]
         public IHttpActionResult Get(int pageIndex, string searchValue)
         {
@@ -76,6 +79,14 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Order By Id
+        /// </summary>
+        /// <param name="id">Order Id</param>
+        /// <returns>Order</returns>
+        /// <response code="200">Return Order</response>
+        /// <response code="400">Invalid Id</response> 
+        /// <response code="500">Fail to Retrieve Order</response> 
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -98,9 +109,21 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Create Order
+        /// </summary>
+        /// <param name="cm">Order Create Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Created Order</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Create</response> 
         [HttpPost]
         public IHttpActionResult Create(OrderCM cm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 Order model = AutoMapper.Mapper.Map<OrderCM, Order>(cm);
@@ -116,9 +139,21 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Update Order
+        /// </summary>
+        /// <param name="um">Order Update Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Updated Order</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Update</response> 
         [HttpPut]
         public IHttpActionResult Update(OrderUM um)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 Order model = AutoMapper.Mapper.Map<OrderUM, Order>(um);
@@ -134,6 +169,14 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete Order By Id
+        /// </summary>
+        /// <param name="id">Order Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return Created Order</response>
+        /// <response code="400">Invalid Id</response> 
+        /// <response code="500">Fail to Delete</response> 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {

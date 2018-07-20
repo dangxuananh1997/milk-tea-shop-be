@@ -30,11 +30,20 @@ namespace API.MilkteaAdmin.Controllers
         }
 
         /// <summary>
-        /// Get Products of 1 page
+        /// Get list Products Paged
         /// </summary>
-        /// <param name="pageIndex">index of requested page</param>
-        /// <param name="searchValue">Seach value</param>
-        /// <returns>Total record and list of current requested page record</returns>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <param name="pageIndex"></param>
+        /// <param name="searchValue"></param>
+        /// <returns></returns>
+        /// <response code="200">Return Products</response>
+        /// <response code="400">Invalid Page Index</response> 
+        /// <response code="500">Fail to Retrieve Products</response>
         [HttpGet]
         public IHttpActionResult Get(int pageIndex, string searchValue)
         {
@@ -68,6 +77,20 @@ namespace API.MilkteaAdmin.Controllers
 
         }
 
+        /// <summary>
+        /// Get Product By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Get
+        /// 
+        /// </remarks>
+        /// <param name="id">Product Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return Product</response>
+        /// <response code="400">Invalid Id</response> 
+        /// <response code="500">Fail to Retrieve Product</response>
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
@@ -87,9 +110,27 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Create Product
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Post
+        /// 
+        /// </remarks>
+        /// <param name="cm">Product Create Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Created Product</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Create Product</response>
         [HttpPost]
         public IHttpActionResult Create(ProductCM cm)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 // Create product
@@ -128,9 +169,27 @@ namespace API.MilkteaAdmin.Controllers
             }
         }
 
+        /// <summary>
+        /// Update Product
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Put
+        /// 
+        /// </remarks>
+        /// <param name="um">Product Update Model</param>
+        /// <returns></returns>
+        /// <response code="200">Return Updated Product</response>
+        /// <response code="400">Model State Invalid</response> 
+        /// <response code="500">Fail to Update Product</response>
         [HttpPut]
         public IHttpActionResult Update(ProductUM um)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
                 Product updateProduct = AutoMapper.Mapper.Map<ProductUM, Product>(um);
@@ -188,6 +247,20 @@ namespace API.MilkteaAdmin.Controllers
 
         }
 
+        /// <summary>
+        /// Delete Product By Id
+        /// </summary>
+        /// <remarks>
+        /// Sample Request:
+        /// 
+        /// Delete
+        /// 
+        /// </remarks>
+        /// <param name="id">Product Id</param>
+        /// <returns></returns>
+        /// <response code="200">Return Empty</response>
+        /// <response code="400">Invalid Product Id</response> 
+        /// <response code="500">Fail to Delete Product</response>
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
