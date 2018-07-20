@@ -48,7 +48,10 @@ namespace API.MilkteaClient.Controllers
                 List<Order> orders;
 
                 // GET ALL
-                orders = _orderService.GetAllOrder().Where(o => o.UserId == CURRENT_USER_ID).ToList();
+                orders = _orderService.GetAllOrder()
+                    .Where(o => o.UserId == CURRENT_USER_ID)
+                    .OrderByDescending(o => o.OrderDate)
+                    .ToList();
 
                 List<OrderVM> orderVMs = AutoMapper.Mapper.Map<List<Order>, List<OrderVM>>(orders);
                 Pager<OrderVM> result = _pagination.ToPagedList<OrderVM>(pageIndex, ConstantDataManager.PAGESIZE, orderVMs);

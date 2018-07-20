@@ -51,12 +51,19 @@ namespace API.MilkteaAdmin.Controllers
                 if (String.IsNullOrEmpty(searchValue))
                 {
                     // GET ALL
-                    orders = _orderService.GetAllOrder().ToList();
+                    orders = _orderService.GetAllOrder()
+                        .OrderByDescending(o => o.OrderDate)
+                        .ToList();
                 }
                 else
                 {
                     // GET SEARCH RESULT
-                    orders = _orderService.GetAllOrder().ToList()/*.Where(p => p..Contains(searchValue)).ToList()*/;
+                    orders = _orderService.GetAllOrder()
+                        .Where(o => o.ContactPhone.Contains(searchValue) 
+                        || o.DeliveryAddress.Contains(searchValue) 
+                        || o.CustomerName.Contains(searchValue))
+                        .OrderByDescending(o => o.OrderDate)
+                        .ToList();
                 }
 
                 List<OrderVM> orderVMs = AutoMapper.Mapper.Map<List<Order>, List<OrderVM>>(orders);
