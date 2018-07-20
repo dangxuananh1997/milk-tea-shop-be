@@ -39,7 +39,7 @@
                 .ForMember(m => m.FullName, map => map.MapFrom(vm => vm.FullName));
 
             CreateMap<UserUM, User>()
-                .ForMember(m => m.Id, map => map.MapFrom(vm => vm.Id))
+                //.ForMember(m => m.Id, map => map.MapFrom(vm => vm.Id))
                 //.ForMember(m => m.Username, map => map.MapFrom(vm => vm.Username))
                 .ForMember(m => m.FullName, map => map.MapFrom(vm => vm.FullName))
                 .ForMember(m => m.Address, map => map.MapFrom(vm => vm.Address))

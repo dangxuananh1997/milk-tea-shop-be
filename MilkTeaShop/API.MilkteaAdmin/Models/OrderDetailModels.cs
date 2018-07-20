@@ -10,7 +10,7 @@ namespace API.MilkteaAdmin.Models
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
 
-        public ProductVariant ProductVariant { get; set; }
+        public ProductVariantODVM ProductVariant { get; set; }
     }
 
     public class OrderDetailCM

@@ -141,6 +141,7 @@ namespace API.MilkteaAdmin.Controllers
                 }
 
                 // UPDATE
+                updateUser.Username = oldUser.Username;
                 _userService.UpdateUser(updateUser);
                 _userService.SaveUserChanges();
 

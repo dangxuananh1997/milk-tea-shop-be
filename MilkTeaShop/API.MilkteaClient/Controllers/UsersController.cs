@@ -1,17 +1,12 @@
 ﻿using API.MilkteaClient.Models;
 using Core.AppService.Business;
-using Core.AppService.Pagination;
-using Core.ObjectModel.ConstantManager;
 using Core.ObjectModel.Entity;
-using Core.ObjectModel.Pagination;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace API.MilkteaClient.Controllers
 {
@@ -19,57 +14,25 @@ namespace API.MilkteaClient.Controllers
     public class UsersController : ApiController
     {
         private readonly IUserService _userService;
-        private readonly IPagination _pagination;
+        private readonly int CURRENT_USER_ID;
 
-        public UsersController(IUserService userService, IPagination pagination)
+        public UsersController(IUserService userService)
         {
             this._userService = userService;
-            this._pagination = pagination;
+
+            // Get the current requesting user
+            string username = HttpContext.Current.User.Identity.GetUserName();
+            CURRENT_USER_ID = _userService.GetUserAsNoTracking(u => u.Username.Equals(username)).Id;
         }
 
-        [HttpGet]
-        public IHttpActionResult Get(int pageIndex, string searchValue)
-        {
-            if (pageIndex <= 0)
-            {
-                return BadRequest(ErrorMessage.INVALID_PAGEINDEX);
-            }
-
-            try
-            {
-                List<User> users;
-                if (String.IsNullOrEmpty(searchValue))
-                {
-                    // GET ALL
-                    users = _userService.GetAllUser().ToList();
-                }
-                else
-                {
-                    // GET SEARCH RESULT
-                    users = _userService.GetAllUser().Where(p => p.FullName.Contains(searchValue)).ToList();
-                }
-
-                List<UserVM> userVMs = AutoMapper.Mapper.Map<List<User>, List<UserVM>>(users);
-                Pager<UserVM> result = _pagination.ToPagedList<UserVM>(pageIndex, ConstantDataManager.PAGESIZE, userVMs);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
-        }
 
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get()
         {
-            if (id <= 0)
-            {
-                return BadRequest(ErrorMessage.INVALID_ID);
-            }
             try
             {
                 UserVM result = AutoMapper.Mapper.Map<User, UserVM>
-                    (_userService.GetUser(id));
+                    (_userService.GetUser(CURRENT_USER_ID));
 
                 return Ok(result);
             }
@@ -85,7 +48,7 @@ namespace API.MilkteaClient.Controllers
             try
             {
                 User updateUser = AutoMapper.Mapper.Map<UserUM, User>(um);
-                User oldUser = _userService.GetUserAsNoTracking(u => u.Id == um.Id);
+                User oldUser = _userService.GetUserAsNoTracking(u => u.Id == CURRENT_USER_ID);
 
                 if (!um.Avatar.Contains("/Media/User/"))
                 {
@@ -123,7 +86,12 @@ namespace API.MilkteaClient.Controllers
                 {
                     updateUser.Avatar = oldUser.Avatar;
                 }
-
+                updateUser.Id = oldUser.Id;
+                updateUser.Username = oldUser.Username;
+                //oldUser.FullName = updateUser.FullName;
+                //oldUser.Address = updateUser.Address;
+                //oldUser.Phone = updateUser.Phone;
+                //oldUser.Avatar = updateUser.Avatar;
                 // UPDATE
                 _userService.UpdateUser(updateUser);
                 _userService.SaveUserChanges();

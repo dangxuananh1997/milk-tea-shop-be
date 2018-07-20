@@ -193,7 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Media\CouponPackage\" />
     <Folder Include="Media\Product\" />
+    <Folder Include="Media\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.AppService\Core.AppService.csproj">

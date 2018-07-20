@@ -11,5 +11,11 @@
             public const string DENIED = "Denied";
             public const string DELIVERED = "Delivered";
         }
+
+        public partial class WorldTime
+        {
+            public const int VIETNAM = 7;
+        }
+
     }
 }

@@ -7,8 +7,6 @@ using Core.ObjectModel.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using System.Web;
@@ -31,6 +29,8 @@ namespace API.MilkteaClient.Controllers
             this._couponItemService = couponItemService;
             this._userService = userService;
             this._pagination = pagination;
+
+            // Get the current requesting user
             string username = HttpContext.Current.User.Identity.GetUserName();
             CURRENT_USER_ID = _userService.GetUser(u => u.Username.Equals(username)).Id;
         }
@@ -89,7 +89,8 @@ namespace API.MilkteaClient.Controllers
             {
                 Order model = AutoMapper.Mapper.Map<OrderCM, Order>(cm);
 
-                model.OrderDate = DateTime.Now;
+                model.OrderDate = DateTime.Now.ToUniversalTime()
+                    .AddHours(ConstantDataManager.WorldTime.VIETNAM);
                 model.Status = ConstantDataManager.OrderStatus.PENDING;
                 model.UserId = CURRENT_USER_ID;
 

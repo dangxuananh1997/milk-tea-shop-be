@@ -79,7 +79,9 @@ namespace API.MilkteaAdmin.Controllers
             try
             {
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>
-                    (_orderService.GetOrder(o => o.Id == id, o => o.OrderDetails));
+                    (_orderService.GetOrder(o => o.Id == id,
+                    o => o.OrderDetails.Select(
+                        p => p.ProductVariant.Product)));
 
                 return Ok(result);
             }

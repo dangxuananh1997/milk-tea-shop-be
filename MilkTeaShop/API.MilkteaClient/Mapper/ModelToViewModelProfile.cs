@@ -14,7 +14,7 @@ namespace API.MilkteaAdmin.Mapper
             CreateMap<Product, ProductVM>()
                 .ForMember(vm => vm.Id, map => map.MapFrom(m => m.Id))
                 .ForMember(vm => vm.Name, map => map.MapFrom(m => m.Name))
-                .ForMember(vm => vm.Picture, map => map.MapFrom(m => WebConfigurationManager.AppSettings["siteName"] + m.Picture));
+                .ForMember(vm => vm.Picture, map => map.MapFrom(m => WebConfigurationManager.AppSettings["adminSiteName"] + m.Picture));
             #endregion
 
             #region ProductVariant
@@ -32,7 +32,7 @@ namespace API.MilkteaAdmin.Mapper
                 .ForMember(vm => vm.FullName, map => map.MapFrom(m => m.FullName))
                 .ForMember(vm => vm.Address, map => map.MapFrom(m => m.Address))
                 .ForMember(vm => vm.Phone, map => map.MapFrom(m => m.Phone))
-                .ForMember(vm => vm.Avatar, map => map.MapFrom(m => WebConfigurationManager.AppSettings["siteName"] + m.Avatar));
+                .ForMember(vm => vm.Avatar, map => map.MapFrom(m => WebConfigurationManager.AppSettings["clientSiteName"] + m.Avatar));
             #endregion
 
             #region CouponPackage
@@ -41,7 +41,7 @@ namespace API.MilkteaAdmin.Mapper
                 .ForMember(vm => vm.Name, map => map.MapFrom(m => m.Name))
                 .ForMember(vm => vm.DrinkQuantity, map => map.MapFrom(m => m.DrinkQuantity))
                 .ForMember(vm => vm.Price, map => map.MapFrom(m => m.Price))
-                .ForMember(vm => vm.Picture, map => map.MapFrom(m => WebConfigurationManager.AppSettings["siteName"] + m.Picture));
+                .ForMember(vm => vm.Picture, map => map.MapFrom(m => WebConfigurationManager.AppSettings["adminSiteName"] + m.Picture));
             #endregion
 
             #region CouponItem
