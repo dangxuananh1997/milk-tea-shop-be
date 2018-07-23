@@ -10,6 +10,7 @@ namespace API.MilkteaAdmin.Models
     public class UserCouponPackageVM
     {
         public int Id { get; set; }
+        public string PackageName { get; set; }
         public int CouponPackageId { get; set; }
         public int DrinkQuantity { get; set; }
         public decimal Price { get; set; }

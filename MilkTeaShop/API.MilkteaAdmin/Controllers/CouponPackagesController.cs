@@ -239,7 +239,8 @@ namespace API.MilkteaAdmin.Controllers
             {
                 CouponPackage updateCouponPackage = AutoMapper.Mapper.Map<CouponPackageUM, CouponPackage>(um);
                 CouponPackage oldCouponPackage = _couponPackageService.GetCouponPackageAsNoTracking(u => u.Id == um.Id);
-                if (!um.Picture.Contains("/Media/CouponPackage/"))
+
+                if (!um.Picture.Contains("/Media/CouponPackage/") && !string.IsNullOrEmpty(um.Picture))
                 {
                     // DELETE OLD AVATAR
                     // physical path to folder contain user avatar

@@ -79,4 +79,15 @@ namespace API.MilkteaAdmin.Models
         [Required]
         public ICollection<OrderDetailUM> OrderDetails { get; set; }
     }
+
+    // Order Update Status Model
+    public class OrderUSM
+    {
+        [Required]
+        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
+        public int Id { get; set; }
+
+        [Required]
+        public string Status { get; set; }
+    }
 }

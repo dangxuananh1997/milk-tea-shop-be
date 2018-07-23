@@ -54,14 +54,16 @@ namespace API.MilkteaAdmin.Controllers
                 if (String.IsNullOrEmpty(searchValue))
                 {
                     // GET ALL
-                    orders = _orderService.GetAllOrder()
+                    orders = _orderService.GetAllOrder(o => o.CouponItems.Select(u => u.UserCouponPackage.CouponPackage),
+                    o => o.OrderDetails.Select(p => p.ProductVariant.Product))
                         .OrderByDescending(o => o.OrderDate)
                         .ToList();
                 }
                 else
                 {
                     // GET SEARCH RESULT
-                    orders = _orderService.GetAllOrder()
+                    orders = _orderService.GetAllOrder(o => o.CouponItems.Select(u => u.UserCouponPackage),
+                    o => o.OrderDetails.Select(p => p.ProductVariant.Product))
                         .Where(o => o.ContactPhone.Contains(searchValue) 
                         || o.DeliveryAddress.Contains(searchValue) 
                         || o.CustomerName.Contains(searchValue))
@@ -98,8 +100,8 @@ namespace API.MilkteaAdmin.Controllers
             {
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>
                     (_orderService.GetOrder(o => o.Id == id,
-                    o => o.OrderDetails.Select(
-                        p => p.ProductVariant.Product)));
+                    o => o.CouponItems.Select( u => u.UserCouponPackage),
+                    o => o.OrderDetails.Select(p => p.ProductVariant.Product)));
 
                 return Ok(result);
             }
@@ -157,10 +159,37 @@ namespace API.MilkteaAdmin.Controllers
             try
             {
                 Order model = AutoMapper.Mapper.Map<OrderUM, Order>(um);
+                foreach (var item in um.OrderDetails)
+                {
+                    item.OrderId = um.Id;
+                }
                 _orderService.UpdateOrder(model);
                 _orderService.SaveOrderChanges();
 
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>(model);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateStatus(OrderUSM um)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                Order order = _orderService.GetOrder(o => o.Id == um.Id);
+                order.Status = um.Status;
+                _orderService.UpdateOrder(order);
+                _orderService.SaveOrderChanges();
+
+                OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>(order);
                 return Ok(result);
             }
             catch (Exception e)

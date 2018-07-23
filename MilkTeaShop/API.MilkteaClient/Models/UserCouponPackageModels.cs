@@ -17,7 +17,7 @@ namespace API.MilkteaClient.Models
         //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
         public DateTime PurchasedDate { get; set; }
 
-        public List<CouponItemCM> CouponItems { get; set; }
+        public List<CouponItemVM> CouponItems { get; set; }
     }
 
     public class UserCouponPackageCM
@@ -25,7 +25,7 @@ namespace API.MilkteaClient.Models
         public int CouponPackageId { get; set; }
         //public int DrinkQuantity { get; set; }
         //public decimal Price { get; set; }
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
     }
 
     public class UserCouponPackageUM

@@ -74,7 +74,9 @@ namespace API.MilkteaClient.Controllers
             try
             {
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>
-                    (_orderService.GetOrder(o => o.Id == id && o.UserId == CURRENT_USER_ID, o => o.OrderDetails));
+                    (_orderService.GetOrder(o => o.Id == id && o.UserId == CURRENT_USER_ID,
+                    o => o.OrderDetails
+                    .Select(x => x.ProductVariant.Product)));
 
                 return Ok(result);
             }
@@ -104,6 +106,7 @@ namespace API.MilkteaClient.Controllers
                 {
                     CouponItem coupon = _couponItemService.GetCouponItem(couponItemId);
                     coupon.OrderId = model.Id;
+                    coupon.IsUsed = true;
                     _couponItemService.UpdateCouponItem(coupon);
                     _couponItemService.SaveCouponItemChanges();
                 }
@@ -127,6 +130,15 @@ namespace API.MilkteaClient.Controllers
                 Order model = AutoMapper.Mapper.Map<OrderUM, Order>(um);
                 _orderService.UpdateOrder(model);
                 _orderService.SaveOrderChanges();
+
+                foreach (int couponItemId in um.CouponItemIds)
+                {
+                    CouponItem coupon = _couponItemService.GetCouponItem(couponItemId);
+                    coupon.OrderId = model.Id;
+                    coupon.IsUsed = true;
+                    _couponItemService.UpdateCouponItem(coupon);
+                    _couponItemService.SaveCouponItemChanges();
+                }
 
                 OrderVM result = AutoMapper.Mapper.Map<Order, OrderVM>(model);
                 return Ok(result);

@@ -3,14 +3,13 @@ using Core.AppService.Business;
 using Core.AppService.Database.Identity;
 using Core.ObjectModel.Entity;
 using Core.ObjectModel.Identity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Data.Linq;
+using System;
 
 namespace API.MilkteaClient.Controllers
 {
@@ -63,10 +62,22 @@ namespace API.MilkteaClient.Controllers
             else
             {
                 // Create user info in User
-                User user = AutoMapper.Mapper.Map<RegisterModel, User>(account);
-                _userService.CreateUser(user);
-                _userService.SaveUserChanges();
-                return Ok(user);
+                try
+                {
+                    User user = AutoMapper.Mapper.Map<RegisterModel, User>(account);
+                    _userService.CreateUser(user);
+                    _userService.SaveUserChanges();
+                    return Ok(user);
+                }
+                catch (DuplicateKeyException e)
+                {
+                    return InternalServerError(e);
+                }
+                catch (Exception e)
+                {
+                    return InternalServerError(e);
+                }
+               
             }
         }
 

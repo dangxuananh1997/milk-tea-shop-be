@@ -80,7 +80,7 @@
 
             #region UserCouponPackage
             CreateMap<UserCouponPackageCM, UserCouponPackage>()
-                .ForMember(m => m.UserId, map => map.MapFrom(vm => vm.UserId))
+                //.ForMember(m => m.UserId, map => map.MapFrom(vm => vm.UserId))
                 .ForMember(m => m.CouponPackageId, map => map.MapFrom(vm => vm.CouponPackageId));
 
             CreateMap<UserCouponPackageUM, UserCouponPackage>()

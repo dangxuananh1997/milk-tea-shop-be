@@ -47,7 +47,7 @@
         public int ProductId { get; set; }
 
         [RegularExpression(@"[0-2]{1}", ErrorMessage = ErrorMessage.INVALID_SIZE)]
-        public Size Size { get; set; }
+        public int Size { get; set; }
 
         [Required]
         [Range(0, int.MaxValue)]

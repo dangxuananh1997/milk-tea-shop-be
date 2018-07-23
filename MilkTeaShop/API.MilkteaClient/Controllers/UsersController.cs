@@ -50,7 +50,7 @@ namespace API.MilkteaClient.Controllers
                 User updateUser = AutoMapper.Mapper.Map<UserUM, User>(um);
                 User oldUser = _userService.GetUserAsNoTracking(u => u.Id == CURRENT_USER_ID);
 
-                if (!um.Avatar.Contains("/Media/User/"))
+                if (!um.Avatar.Contains("/Media/User/") && !string.IsNullOrEmpty(um.Avatar))
                 {
                     // DELETE OLD AVATAR
                     // physical path to folder contain user avatar
@@ -88,10 +88,7 @@ namespace API.MilkteaClient.Controllers
                 }
                 updateUser.Id = oldUser.Id;
                 updateUser.Username = oldUser.Username;
-                //oldUser.FullName = updateUser.FullName;
-                //oldUser.Address = updateUser.Address;
-                //oldUser.Phone = updateUser.Phone;
-                //oldUser.Avatar = updateUser.Avatar;
+
                 // UPDATE
                 _userService.UpdateUser(updateUser);
                 _userService.SaveUserChanges();

@@ -80,11 +80,19 @@ namespace Infrastructure.Identity.Adapter
                 Account account = new Account { UserName = username, PhoneNumber = username };
 
                 IdentityResult user = await this._accountService.CreateAsync(account, password);
-                _accountService.AddToRole(account.Id, UserType.Member.ToString());
 
                 if (!user.Succeeded)
                 {
                     result.Errors.AddRange(user.Errors);
+                }
+                else
+                {
+                    var role = _accountService.AddToRole(account.Id, UserType.Member.ToString());
+
+                    if (!role.Succeeded)
+                    {
+                        result.Errors.AddRange(role.Errors);
+                    }
                 }
 
                 scope.Complete();

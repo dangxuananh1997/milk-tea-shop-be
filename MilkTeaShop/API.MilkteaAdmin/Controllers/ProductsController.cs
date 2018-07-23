@@ -195,7 +195,7 @@ namespace API.MilkteaAdmin.Controllers
                 Product updateProduct = AutoMapper.Mapper.Map<ProductUM, Product>(um);
                 Product oldProduct = _productService.GetProductAsNoTracking(p => p.Id == um.Id);
 
-                if (!um.Picture.Contains("/Media/Product/"))
+                if (!um.Picture.Contains("/Media/Product/") && !string.IsNullOrEmpty(um.Picture))
                 {
                     // DELETE OLD PICTURE
                     // physical path to folder contain product picture

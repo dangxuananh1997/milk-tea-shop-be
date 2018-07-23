@@ -34,12 +34,8 @@ namespace API.MilkteaAdmin.Models
         [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int Id { get; set; }
 
-        [Required]
-        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int OrderId { get; set; }
 
-        [Required]
-        [RegularExpression(@"^(\d{1,5})\b", ErrorMessage = ErrorMessage.INVALID_ID)]
         public int ProductVariantId { get; set; }
 
         [Required]
